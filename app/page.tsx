@@ -7,16 +7,15 @@ import Shop from "@/components/shop";
 import Showcase from "@/components/showcase";
 
 const Home = () => {
-  return (
-    <main className="min-h-screen bg-background">
-      <Hero />
-      <About />
-      <Showcase />
-      <Shop />
-      <Blogs />
-      <Contact />
-      <Footer />
-    </main>
-  );
+	return (
+		<main className="min-h-screen bg-background">
+			<Hero />
+			<About />
+			<Showcase />
+			{/* <Blogs /> */}
+			<Contact />
+			<Footer />
+		</main>
+	);
 };
 export default Home;
