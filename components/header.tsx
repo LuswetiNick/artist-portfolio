@@ -75,9 +75,12 @@ const Header = () => {
               <SheetContent className="overflow-y-auto pt-0 pb-5" side="bottom">
                 <SheetHeader className="pb-0">
                   <SheetTitle>
-                    <div className="font-bold text-2xl text-primary tracking-wider">
-                      JD.
-                    </div>
+                    <Image
+              alt="Portrait of the artist"
+              height={96}
+              src="/images/logo.png"
+              width={96}
+            />
                   </SheetTitle>
                 </SheetHeader>
                 <div className="mt-0 flex flex-col gap-0 px-4">
