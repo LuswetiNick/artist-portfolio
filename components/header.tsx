@@ -63,9 +63,12 @@ const Header = () => {
         {/* mobile menu */}
         <div className="block md:hidden">
           <div className="flex items-center justify-between">
-            <div className="font-bold text-2xl text-primary tracking-wider">
-              JD.
-            </div>
+             <Image
+              alt="Portrait of the artist"
+              height={96}
+              src="/images/logo.png"
+              width={96}
+            />
             <Sheet>
               <SheetTrigger asChild>
                 <Button size="icon" variant="outline">
