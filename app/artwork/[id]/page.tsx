@@ -1,11 +1,11 @@
-import { ArrowLeft, MessageCircle } from "lucide-react";
-import Image from "next/image";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getProductById } from "@/data/showcase-data";
+import { ImageModal } from "./ImageModal";
 
 interface ProductPageProps {
   params: {
@@ -24,7 +24,7 @@ export default function ProductPage({ params }: ProductPageProps) {
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <Button asChild variant="ghost">
             <Link href="/artwork">
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              <ArrowLeft className="h-4 w-4" />
               Back to artwork
             </Link>
           </Button>
@@ -34,15 +34,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="grid items-start gap-12 lg:grid-cols-2">
               {/* Image */}
               <div className="space-y-4">
-                <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-muted">
-                  <Image
-                    alt={product.title}
-                    className="h-full w-full object-cover"
-                    height={1000}
-                    src={product.image}
-                    width={1000}
-                  />
-                </div>
+                <ImageModal alt={product.title} src={product.image} />
               </div>
 
               {/* Details */}
@@ -50,7 +42,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h1 className="text-balance font-bold text-3xl md:text-4xl">
+                      <h1 className="text-balance font-bold font-ojuju text-3xl md:text-4xl">
                         {product.title}
                       </h1>
                       <p className="mt-2 text-lg text-muted-foreground">

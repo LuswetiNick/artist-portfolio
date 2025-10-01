@@ -2,17 +2,16 @@ import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "./header";
-import { Button } from "./ui/button";
 
 const Hero = () => {
   return (
     <div className="relative flex h-screen items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-primary">
         <Image
           alt="Artist at work"
           className="h-full w-full object-cover opacity-80"
           fill
-          src="/images/IMG-20250925-WA0017.jpg"
+          src="/images/creation1.jpg"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20" />
       </div>
@@ -20,8 +19,7 @@ const Hero = () => {
       <div className="relative z-10 px-6 text-center">
         <h1 className="mb-4 font-bold text-4xl text-white tracking-tight md:text-6xl lg:text-7xl">
           <div className="relative inline-flex">
-            <span className="absolute inset-x-0 bottom-0 border-primary border-b-[30px]" />
-            <span className="relative block transform transition-transform delay-200 duration-300 hover:translate-y-[-5px]">
+            <span className="relative block transform font-bold font-ojuju text-7xl transition-transform delay-200 duration-300 hover:translate-y-[-5px]">
               Afrika Mosaics
             </span>
           </div>

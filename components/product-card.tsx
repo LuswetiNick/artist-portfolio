@@ -1,11 +1,7 @@
 "use client";
-import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/data/showcase-data";
-import { WhatsappDialog } from "./responsive-dialog";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 
 interface ProductCardProps {
@@ -24,35 +20,18 @@ export default function ProductCard({ product }: ProductCardProps) {
             src={product.image || "/placeholder.svg"}
             width={500}
           />
-
-          {/* {product.price && (
-            <div className="absolute top-3 right-3">
-              <Badge variant="destructive">
-                KES {product.price.toLocaleString()}
-              </Badge>
-            </div>
-          )} */}
         </div>
       </Link>
-      <div className="space-y-3 p-4">
-        <div className="space-y-2">
-          <Link href={`/artwork/${product.id}`}>
-            <h3 className="font-semibold text-lg leading-tight transition-colors group-hover:text-primary">
+      <div className="p-4">
+        <div className="space-y-4">
+          <Link className="text-left" href={`/artwork/${product.id}`}>
+            <h3 className="font-ojuju font-semibold text-lg leading-tight transition-colors group-hover:text-primary">
               {product.title}
             </h3>
           </Link>
           <p className="line-clamp-2 text-muted-foreground text-sm">
             {product.description}
           </p>
-        </div>
-
-        <div className="flex items-center justify-between">
-          {/* <WhatsappDialog product={product}>
-            <Button disabled={!product.available} variant="outline">
-              <MessageCircle className="size-4" />
-              {product.available ? "Inquire" : "Sold Out"}
-            </Button>
-          </WhatsappDialog> */}
         </div>
       </div>
     </Card>

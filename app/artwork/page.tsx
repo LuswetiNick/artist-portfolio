@@ -19,11 +19,6 @@ export default function Artwork() {
             The Art
           </h1>
           <div className="mx-auto mb-6 h-1 w-20 rounded-full bg-primary" />
-          {/* <p className="mx-auto max-w-2xl text-pretty text-lg text-muted-foreground">
-            Discover and inquire about original paintings and high-quality
-            prints. Contact us directly via WhatsApp for personalized
-            assistance.
-          </p> */}
 
           {productData.length > 0 ? (
             <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">

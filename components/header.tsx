@@ -21,12 +21,9 @@ const TopMenu = [
 
 const Header = () => {
   return (
-    <header className="absolute top-0 left-0 z-10 flex w-full items-center justify-between px-6 py-6">
-      <div className="w-full min-w-full rounded-md border-primary px-4 py-2 backdrop-blur">
+    <header className="absolute top-0 left-0 z-10 flex w-full items-center justify-between px-6 py-4">
+      <div className="w-full min-w-full px-4 py-2">
         <nav className="hidden justify-between md:flex">
-          {/* <div className="font-bold text-2xl text-primary tracking-wider">
-            JD.
-          </div> */}
           <div className="relative">
             <Image
               alt="Portrait of the artist"
@@ -50,20 +47,20 @@ const Header = () => {
                 </Link>
               ))}
             </ul>
-            {/* <div className="flex gap-2">
+            <div className="flex gap-2">
               <Link
                 className={buttonVariants({ variant: "default" })}
                 href="#contact"
               >
                 Contact
               </Link>
-            </div> */}
+            </div>
           </div>
         </nav>
         {/* mobile menu */}
         <div className="block md:hidden">
           <div className="flex items-center justify-between">
-             <Image
+            <Image
               alt="Portrait of the artist"
               height={96}
               src="/images/logo.png"
@@ -79,11 +76,11 @@ const Header = () => {
                 <SheetHeader className="pb-0">
                   <SheetTitle>
                     <Image
-              alt="Portrait of the artist"
-              height={96}
-              src="/images/logo.png"
-              width={96}
-            />
+                      alt="Portrait of the artist"
+                      height={96}
+                      src="/images/logo.png"
+                      width={96}
+                    />
                   </SheetTitle>
                 </SheetHeader>
                 <div className="mt-0 flex flex-col gap-0 px-4">
@@ -98,7 +95,7 @@ const Header = () => {
                   ))}
                 </div>
                 <div className="border-t px-4 pt-4">
-                  {/* <div className="mt-2 flex flex-col gap-2">
+                  <div className="mt-2 flex flex-col gap-2">
                     <Link
                       className={cn(
                         buttonVariants({ variant: "default" }),
@@ -108,7 +105,7 @@ const Header = () => {
                     >
                       Contact
                     </Link>
-                  </div> */}
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>

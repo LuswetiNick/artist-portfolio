@@ -6,7 +6,7 @@ const Showcase = () => {
   return (
     <section className="bg-muted px-6 py-20" id="showcase">
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-3 text-center font-bold text-3xl md:text-4xl">
+        <h2 className="mb-3 text-center font-bold font-ojuju text-3xl md:text-4xl">
           The Art
         </h2>
         <div className="mx-auto mb-16 h-1 w-20 rounded-full bg-primary" />
@@ -42,7 +42,7 @@ const Showcase = () => {
                   width={500}
                 />
                 <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <h3 className="font-semibold text-white text-xl">
+                  <h3 className="font-ojuju font-semibold text-2xl text-white">
                     {item.title}
                   </h3>
                 </div>
