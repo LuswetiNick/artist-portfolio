@@ -18,6 +18,15 @@ export default function ProductPage({ params }: ProductPageProps) {
   if (!product) {
     notFound();
   }
+  
+  // If it's a Pot product, redirect to artwork page since Pots don't have detail pages
+  if (product.category === "Pots") {
+    notFound();
+  }
+  
+  // At this point we know it's a full Product, not a PotProduct
+  const fullProduct = product as Extract<typeof product, { title: string }>;
+  
   return (
     <section className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -34,7 +43,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="grid items-start gap-12 lg:grid-cols-2">
               {/* Image */}
               <div className="space-y-4">
-                <ImageModal alt={product.title} src={product.image} />
+                <ImageModal alt={fullProduct.title} src={fullProduct.image} />
               </div>
 
               {/* Details */}
@@ -43,16 +52,16 @@ export default function ProductPage({ params }: ProductPageProps) {
                   <div className="flex items-start justify-between">
                     <div>
                       <h1 className="text-balance font-bold font-ojuju text-3xl md:text-4xl">
-                        {product.title}
+                        {fullProduct.title}
                       </h1>
                       <p className="mt-2 text-lg text-muted-foreground">
-                        {product.year}
+                        {fullProduct.year}
                       </p>
                     </div>
                   </div>
 
                   <p className="text-lg leading-relaxed">
-                    {product.description}
+                    {fullProduct.description}
                   </p>
                 </div>
 
@@ -63,7 +72,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                       className="border-green-600 text-green-600"
                       variant="outline"
                     >
-                      {product.available ? "Available" : "Sold Out"}
+                      {fullProduct.available ? "Available" : "Sold Out"}
                     </Badge>
                   </div>
 
@@ -87,15 +96,15 @@ export default function ProductPage({ params }: ProductPageProps) {
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="text-muted-foreground">Materials:</span>
-                      <p className="font-medium">{product.materials}</p>
+                      <p className="font-medium">{fullProduct.materials}</p>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Dimensions:</span>
-                      <p className="font-medium">{product.dimensions}</p>
+                      <p className="font-medium">{fullProduct.dimensions}</p>
                     </div>
                     <div>
                       <span className="text-muted-foreground">Year:</span>
-                      <p className="font-medium">{product.year}</p>
+                      <p className="font-medium">{fullProduct.year}</p>
                     </div>
                   </div>
                 </div>

@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/data/showcase-data";
+import type { Product, ShowcaseProduct } from "@/data/showcase-data";
 import { Card } from "./ui/card";
 
 interface ProductCardProps {
-  product: Product;
+  product: Product; // Only accept full Product, not PotProduct
 }
 
 export default function ProductCard({ product }: ProductCardProps) {

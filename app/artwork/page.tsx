@@ -3,8 +3,12 @@ import Link from "next/link";
 import ProductCard from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 import { productData } from "@/data/showcase-data";
+import type { Product } from "@/data/showcase-data";
 
 export default function Artwork() {
+  // Filter out Pots since they don't have detail pages
+  const fullProducts = productData.filter((product): product is Product => 'title' in product);
+  
   return (
     <div className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -20,14 +24,14 @@ export default function Artwork() {
           </h1>
           <div className="mx-auto mb-6 h-1 w-20 rounded-full bg-primary" />
 
-          {productData.length > 0 ? (
+          {fullProducts.length > 0 ? (
             <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-              {productData.map((product) => (
+              {fullProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
           ) : (
-            <p>No blog posts found.</p>
+            <p>No artwork found.</p>
           )}
         </div>
       </div>

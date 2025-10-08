@@ -7,9 +7,18 @@ export interface Product {
   dimensions: string;
   available: boolean;
   image: string;
+  category: string;
 }
 
-export const productData: Product[] = [
+export interface PotProduct {
+  id: string;
+  category: "Pots";
+  image: string;
+}
+
+export type ShowcaseProduct = Product | PotProduct;
+
+export const productData: ShowcaseProduct[] = [
   {
     id: "1",
     title: "Crone 1",
@@ -20,6 +29,7 @@ export const productData: Product[] = [
     dimensions: "11/2 ft by 2 ft",
     available: true,
     image: "/images/IMG-20250925-WA0024.jpg",
+    category: "Murals",
   },
   {
     id: "2",
@@ -31,6 +41,7 @@ export const productData: Product[] = [
     dimensions: "2 ft by 3 ft",
     available: true,
     image: "/images/IMG-20250925-WA0023.jpg",
+    category: "Wall panels",
   },
   {
     id: "3",
@@ -42,6 +53,7 @@ export const productData: Product[] = [
     dimensions: "2 ft by 1 ft",
     available: true,
     image: "/images/IMG-20250925-WA0020.jpg",
+    category: "Wall panels",
   },
   {
     id: "4",
@@ -53,6 +65,7 @@ export const productData: Product[] = [
     dimensions: "1 ft diameter",
     available: true,
     image: "/images/IMG-20250925-WA0011.jpg",
+    category: "Wall panels",
   },
   {
     id: "5",
@@ -64,6 +77,7 @@ export const productData: Product[] = [
     dimensions: "2ft by 1 ft",
     available: true,
     image: "/images/IMG-20250925-WA0019.jpg",
+    category: "Wall panels",
   },
   {
     id: "6",
@@ -75,6 +89,7 @@ export const productData: Product[] = [
     dimensions: "2ft by 1 ft",
     available: true,
     image: "/images/IMG-20250925-WA0015.jpg",
+    category: "Wall panels",
   },
   {
     id: "7",
@@ -86,6 +101,7 @@ export const productData: Product[] = [
     dimensions: "1 ft by 11/2 ft",
     available: true,
     image: "/images/IMG-20250925-WA0017.jpg",
+    category: "Wall panels",
   },
   {
     id: "8",
@@ -97,6 +113,7 @@ export const productData: Product[] = [
     dimensions: "21/2 ft by 21/2 ft",
     available: true,
     image: "/images/mandrill.jpg",
+    category: "Wall panels",
   },
   {
     id: "9",
@@ -108,6 +125,7 @@ export const productData: Product[] = [
     dimensions: "56 square meters",
     available: true,
     image: "/images/IMG-20250925-WA0016.jpg",
+    category: "Murals",
   },
   {
     id: "10",
@@ -119,6 +137,7 @@ export const productData: Product[] = [
     dimensions: "40 square meters",
     available: true,
     image: "/images/creation1.jpg",
+    category: "Murals",
   },
   {
     id: "11",
@@ -130,6 +149,7 @@ export const productData: Product[] = [
     dimensions: "1 ft by 2ft",
     available: true,
     image: "/images/IMG-20250925-WA0021.jpg",
+    category: "Wall panels",
   },
   {
     id: "12",
@@ -141,6 +161,7 @@ export const productData: Product[] = [
     dimensions: "1 ft by 2ft",
     available: true,
     image: "/images/IMG-20250925-WA0018.jpg",
+    category: "Wall panels",
   },
   {
     id: "13",
@@ -152,6 +173,7 @@ export const productData: Product[] = [
     dimensions: "15 sq meters",
     available: true,
     image: "/images/IMG-20250925-WA0012.jpg",
+    category: "Murals",
   },
   {
     id: "14",
@@ -163,15 +185,52 @@ export const productData: Product[] = [
     dimensions: "11 square meters",
     available: true,
     image: "/images/IMG-20250925-WA0014.jpg",
+    category: "Murals",
+  },
+  {
+    id: "15",
+    category: "Pots",
+    image: "/images/IMG-20251006-WA0004.jpg",
+  },
+  {
+    id: "16",
+    category: "Pots",
+    image: "/images/IMG-20251006-WA0005.jpg",
+  },
+  {
+    id: "17",
+    category: "Pots",
+    image: "/images/IMG-20251006-WA0006.jpg",
+  },
+  {
+    id: "18",
+    category: "Pots",
+    image: "/images/IMG-20251006-WA0007.jpg",
+  },
+  {
+    id: "19",
+    category: "Pots",
+    image: "/images/IMG-20251006-WA0008.jpg",
+  },
+  {
+    id: "20",
+    category: "Pots",
+    image: "/images/IMG-20251006-WA0009.jpg",
+  },
+  {
+    id: "21",
+    category: "Pots",
+    image: "/images/IMG-20251006-WA0010.jpg",
   },
 ];
 
-export function getProductById(id: string): Product | undefined {
+export function getProductById(id: string): ShowcaseProduct | undefined {
   return productData.find((product) => product.id === id);
 }
 
 export function getRecentProducts(limit = 3): Product[] {
   return productData
+    .filter((product): product is Product => 'title' in product) // Filter out Pots
     .sort((a, b) => new Date(b.year).getTime() - new Date(a.year).getTime())
     .slice(0, limit);
 }

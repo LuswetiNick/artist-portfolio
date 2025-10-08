@@ -22,13 +22,15 @@
         "noUnknownAtRules": "off"
       },
       "nursery": {
-        "useConsistentTypeDefinitions": "off"
+        "useConsistentTypeDefinitions": "off",
+        "noShadow": "off"
       },
       "security": {
         "noDangerouslySetInnerHtml": "off"
       },
       "style": {
-        "useNumericSeparators": "off"
+        "useNumericSeparators": "off",
+        "noNestedTernary": "off"
       }
     },
     "domains": {
