@@ -8,6 +8,7 @@ import {
   type ShowcaseProduct,
 } from "@/data/showcase-data";
 import { Button } from "./ui/button";
+import { ImageModal } from "./image-modal";
 
 const categories = ["All", "Wall panels", "Murals", "Pots"] as const;
 type Category = (typeof categories)[number];
@@ -83,7 +84,7 @@ const Showcase = () => {
               <div
                 className={`group relative transform overflow-hidden rounded-lg shadow-lg transition-all duration-300 ${
                   isPot
-                    ? ""
+                    ? "cursor-pointer hover:scale-[1.02] hover:shadow-xl"
                     : "cursor-pointer hover:scale-[1.02] hover:shadow-xl"
                 }`}
                 key={item.id}
@@ -98,7 +99,7 @@ const Showcase = () => {
                   }
                   className={`h-80 w-full object-cover ${
                     isPot
-                      ? ""
+                      ? "transition-transform duration-700 group-hover:scale-110"
                       : "transition-transform duration-700 group-hover:scale-110"
                   }`}
                   height={500}
@@ -116,7 +117,13 @@ const Showcase = () => {
             );
 
             return isPot ? (
-              <div key={item.id}>{content}</div>
+              <ImageModal
+                key={item.id}
+                src={item.image}
+                alt={`Pot ${item.id}`}
+              >
+                {content}
+              </ImageModal>
             ) : (
               <Link href={`/artwork/${item.id}`} key={item.id}>
                 {content}

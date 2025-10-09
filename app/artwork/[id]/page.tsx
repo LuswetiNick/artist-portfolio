@@ -13,8 +13,9 @@ interface ProductPageProps {
   };
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
-  const product = getProductById(params.id);
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params;
+  const product = getProductById(id);
   if (!product) {
     notFound();
   }
@@ -43,7 +44,16 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="grid items-start gap-12 lg:grid-cols-2">
               {/* Image */}
               <div className="space-y-4">
-                <ImageModal alt={fullProduct.title} src={fullProduct.image} />
+                <ImageModal alt={fullProduct.title} src={fullProduct.image}>
+                  <div className="cursor-pointer">
+                    <img
+                      alt={fullProduct.title}
+                      className="w-full rounded-lg object-cover"
+                      src={fullProduct.image}
+                      style={{ aspectRatio: "1/1" }}
+                    />
+                  </div>
+                </ImageModal>
               </div>
 
               {/* Details */}

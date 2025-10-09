@@ -19,7 +19,7 @@ export default function Artwork() {
           </Link>
         </Button>
         <div className="space-y-4 text-center">
-          <h1 className="text-balance font-bold text-4xl md:text-5xl">
+          <h1 className="text-balance font-bold text-4xl md:text-5xl font-ojuju">
             The Art
           </h1>
           <div className="mx-auto mb-6 h-1 w-20 rounded-full bg-primary" />

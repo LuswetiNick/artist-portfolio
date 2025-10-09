@@ -24,7 +24,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </Link>
       <div className="p-4">
         <div className="space-y-4">
-          <Link className="text-left" href={`/artwork/${product.id}`}>
+          <Link  href={`/artwork/${product.id}`}>
             <h3 className="font-ojuju font-semibold text-lg leading-tight transition-colors group-hover:text-primary">
               {product.title}
             </h3>
