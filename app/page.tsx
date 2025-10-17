@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import About from "@/components/about";
+import Blogs from "@/components/blogs";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 import Hero from "@/components/hero";
@@ -44,7 +45,7 @@ const Home = () => {
       <Hero />
       <About />
       <Showcase />
-      {/* <Blogs /> */}
+      <Blogs />
       <Contact sendMail={sendMail} />
       <Footer />
     </main>

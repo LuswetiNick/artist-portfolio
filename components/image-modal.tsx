@@ -22,11 +22,14 @@ export const ImageModal = ({ src, alt, children }: ImageModalProps) => {
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-4xl w-full p-2  border-none" showCloseButton={true}>
+      <DialogContent
+        className="w-full max-w-4xl border-none p-2"
+        showCloseButton={false}
+      >
         <DialogHeader>
           <DialogTitle className="sr-only">{alt}</DialogTitle>
         </DialogHeader>
-        <div className="relative w-full h-[80vh] flex items-center justify-center">
+        <div className="relative flex h-[80vh] w-full items-center justify-center">
           <Image
             alt={alt}
             className="max-h-full max-w-full object-contain"

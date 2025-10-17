@@ -19,23 +19,23 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (!product) {
     notFound();
   }
-  
+
   // If it's a Pot product, redirect to artwork page since Pots don't have detail pages
   if (product.category === "Pots") {
     notFound();
   }
-  
+
   // At this point we know it's a full Product, not a PotProduct
   const fullProduct = product as Extract<typeof product, { title: string }>;
-  
+
   return (
     <section className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <Button asChild variant="ghost">
-            <Link href="/artwork">
+            <Link href={`/artwork?category=${encodeURIComponent(fullProduct.category)}`}>
               <ArrowLeft className="h-4 w-4" />
-              Back to artwork
+              Back to {fullProduct.category}
             </Link>
           </Button>
         </div>

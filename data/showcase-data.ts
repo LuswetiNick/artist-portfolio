@@ -222,6 +222,76 @@ export const productData: ShowcaseProduct[] = [
     category: "Pots",
     image: "/images/IMG-20251006-WA0010.jpg",
   },
+  {
+    id: "22",
+    title: "River between",
+    description: "A language of no words",
+    year: 2019,
+    materials: "Ceramic tiles on stone.",
+    dimensions: "3 ft by 3ft",
+    available: true,
+    image: "/images/IMG-20251017-WA0012.jpg",
+    category: "Wall panels",
+  },
+  {
+    id: "23",
+    title: "Eye fly",
+    description:
+      "A fanciful take on a butterfly with multiple eye spots and a generous palette.Now you see me",
+    year: 2019,
+    materials: "Glass mosaic tiles",
+    dimensions: "2 ft by 2ft",
+    available: true,
+    image: "/images/IMG-20251017-WA0013.jpg",
+    category: "Wall panels",
+  },
+  {
+    id: "24",
+    title: "Coco cabin",
+    description:
+      "The sun shines a yellow smile upon a fisherman as he glides gently on his boat past a whimsical cabin by the sea.",
+    year: 2019,
+    materials: "Granite",
+    dimensions: "11 square meters ",
+    available: true,
+    image: "/images/IMG-20251017-WA0014.jpg",
+    category: "Murals",
+  },
+  {
+    id: "25",
+    title: "Wine on gold",
+    description: "How she wears her coat of many colours!",
+    year: 2019,
+    materials: "Ceramic tiles",
+    dimensions: "1 ft by 2 ft ",
+    available: true,
+    image: "/images/IMG-20251017-WA0015.jpg",
+    category: "Wall panels",
+  },
+  {
+    id: "26",
+    title: "Taking stork",
+    description:
+      "Beauty by another name.The frog at the other end of this yellow-billed stork’s stare might disagree.",
+    year: 2019,
+    materials: "Ceramic tiles",
+    dimensions: "1 square meter",
+    available: true,
+    image: "/images/IMG-20251017-WA0016.jpg",
+    category: "Wall panels",
+  },
+  {
+    id: "27",
+    title: "Mos mos",
+    description:
+      "Slow but…sure? Asked the hopper right before.Sorry. It's over now.",
+    year: 2019,
+    materials: "Ceramic tiles",
+    dimensions: "6 square meters ",
+    available: true,
+    image: "/images/mosmos.jpg",
+    category: "Wall panels",
+  },
 ];
 
 export function getProductById(id: string): ShowcaseProduct | undefined {
@@ -230,7 +300,7 @@ export function getProductById(id: string): ShowcaseProduct | undefined {
 
 export function getRecentProducts(limit = 3): Product[] {
   return productData
-    .filter((product): product is Product => 'title' in product) // Filter out Pots
+    .filter((product): product is Product => "title" in product) // Filter out Pots
     .sort((a, b) => new Date(b.year).getTime() - new Date(a.year).getTime())
     .slice(0, limit);
 }

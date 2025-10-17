@@ -1,25 +1,26 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import {
   type Product,
   productData,
   type ShowcaseProduct,
 } from "@/data/showcase-data";
-import { Button } from "./ui/button";
 import { ImageModal } from "./image-modal";
-
-const categories = ["All", "Wall panels", "Murals", "Pots"] as const;
-type Category = (typeof categories)[number];
+import { buttonVariants } from "./ui/button";
 
 const Showcase = () => {
-  const [activeCategory, setActiveCategory] = useState<Category>("All");
+  // Build a map of category -> first item in that category
+  const categoryEntries = Array.from(
+    productData
+      .reduce(
+        (map, item) =>
+          map.has(item.category) ? map : map.set(item.category, item),
+        new Map<string, ShowcaseProduct>()
+      )
+      .entries()
+  );
 
-  const filteredProducts =
-    activeCategory === "All"
-      ? productData
-      : productData.filter((product) => product.category === activeCategory);
   return (
     <section className="bg-muted px-6 py-20" id="showcase">
       <div className="mx-auto max-w-7xl">
@@ -28,7 +29,6 @@ const Showcase = () => {
         </h2>
         <div className="mx-auto mb-16 h-1 w-20 rounded-full bg-primary" />
         <div className="mb-8 text-center">
-          {" "}
           <p>
             Mosaic making is what gets my creative juices really flowing. The
             mosaics are created on all manner of suitable surfaces and in
@@ -44,90 +44,85 @@ const Showcase = () => {
             line flows, color, mood and movement.
           </p>
         </div>
-        <div className="mb-12 flex flex-wrap justify-center gap-3">
-          {categories.map((category) => (
-            <Button
-              className={`font-medium text-sm transition-all duration-200 sm:text-base ${
-                activeCategory === category
-                  ? "scale-105 bg-primary text-primary-foreground shadow-lg shadow-primary/25"
-                  : "border-border bg-card hover:border-primary/50 hover:bg-secondary"
-              }
-              `}
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              variant={activeCategory === category ? "default" : "outline"}
-            >
-              {category}
-              <span
-                className={`rounded-md px-2 py-0.5 text-xs ${
-                  activeCategory === category
-                    ? "bg-primary-foreground/20 text-primary-foreground"
-                    : "bg-primary/10 text-primary"
-                }
-              `}
-              >
-                {category === "All"
-                  ? productData.length
-                  : productData.filter((p) => p.category === category).length}
-              </span>
-            </Button>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {filteredProducts.map((item) => {
-            const isPot = item.category === "Pots";
-            // Type guard to check if item is a Product (has title)
-            const isProduct = (item: ShowcaseProduct): item is Product =>
-              "title" in item;
 
-            const content = (
-              <div
-                className={`group relative transform overflow-hidden rounded-lg shadow-lg transition-all duration-300 ${
-                  isPot
-                    ? "cursor-pointer hover:scale-[1.02] hover:shadow-xl"
-                    : "cursor-pointer hover:scale-[1.02] hover:shadow-xl"
-                }`}
-                key={item.id}
-              >
-                <Image
-                  alt={
-                    isPot
-                      ? `Pot ${item.id}`
-                      : isProduct(item)
-                        ? item.title
-                        : `Artwork ${item.id}`
-                  }
-                  className={`h-80 w-full object-cover ${
-                    isPot
-                      ? "transition-transform duration-700 group-hover:scale-110"
-                      : "transition-transform duration-700 group-hover:scale-110"
-                  }`}
-                  height={500}
-                  src={item.image}
-                  width={500}
-                />
-                {!isPot && isProduct(item) && (
-                  <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <h3 className="font-ojuju font-semibold text-2xl text-white">
-                      {item.title}
-                    </h3>
-                  </div>
-                )}
+        <div className="flex w-full flex-col">
+          {categoryEntries.map(([category, item], idx) => {
+            const isPot = category === "Pots";
+            const isProduct = (i: ShowcaseProduct): i is Product =>
+              "title" in i;
+            const reversed = idx % 2 === 1; // alternate layout per row
+
+            const framedImage = (
+              <div>
+                <div className="relative aspect-video overflow-hidden border">
+                  {/* Category label over image */}
+                  {/* <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center p-3">
+                    <span className="rounded-full bg-black/60 px-4 py-1 font-semibold text-sm text-white backdrop-blur">
+                      {category}
+                    </span>
+                  </div> */}
+                  <Image
+                    alt={
+                      isPot
+                        ? `Pot ${item.id}`
+                        : isProduct(item)
+                          ? item.title
+                          : `${category}`
+                    }
+                    className="object-cover"
+                    fill
+                    sizes="(min-width: 1024px) 800px, 100vw"
+                    src={item.image}
+                  />
+                </div>
               </div>
             );
 
-            return isPot ? (
-              <ImageModal
-                key={item.id}
-                src={item.image}
-                alt={`Pot ${item.id}`}
-              >
-                {content}
+            const imageContent = isPot ? (
+              <ImageModal alt={`Pot ${item.id}`} src={item.image}>
+                {framedImage}
               </ImageModal>
+            ) : isProduct(item) ? (
+              <Link href={`/artwork/${item.id}`}>{framedImage}</Link>
             ) : (
-              <Link href={`/artwork/${item.id}`} key={item.id}>
-                {content}
-              </Link>
+              framedImage
+            );
+
+            const textBlock = (
+              <div>
+                <div className="mb-8 px-3 md:mb-0 md:px-14">
+                  <h2 className="mb-6 font-bold text-3xl tracking-tight sm:text-5xl">
+                    {category}
+                  </h2>
+                  <div className="mb-8 space-y-4">
+                    <Link
+                      className={buttonVariants({ variant: "default" })}
+                      href={`/artwork?category=${encodeURIComponent(category)}`}
+                    >
+                      View all {category}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            );
+
+            return (
+              <section
+                className="container mx-auto grid grid-cols-1 items-center gap-12 pt-16 pb-16 md:pt-24 md:pb-24 lg:grid-cols-2"
+                key={category}
+              >
+                {reversed ? (
+                  <>
+                    {imageContent}
+                    {textBlock}
+                  </>
+                ) : (
+                  <>
+                    {textBlock}
+                    {imageContent}
+                  </>
+                )}
+              </section>
             );
           })}
         </div>
