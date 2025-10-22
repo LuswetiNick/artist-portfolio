@@ -23,7 +23,7 @@ export const ImageModal = ({ src, alt, children }: ImageModalProps) => {
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent
-        className="w-full max-w-4xl border-none p-2"
+        className="w-full max-w-4xl border-none bg-black p-2"
         showCloseButton={false}
       >
         <DialogHeader>

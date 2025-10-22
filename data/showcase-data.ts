@@ -167,7 +167,7 @@ export const productData: ShowcaseProduct[] = [
     id: "13",
     title: "Nyumbani",
     description:
-      "A guinea fowl’s poise. The patterns of its polka-dotted apparel play out in my mind like a game of chess.",
+      "A collage of drawings made by young children from Nyumbani Children's Village for orphans. To see their world through their eyes!",
     year: 2012,
     materials: "Ceramic tiles",
     dimensions: "15 sq meters",

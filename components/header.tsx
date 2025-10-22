@@ -15,7 +15,7 @@ import {
 const TopMenu = [
   { name: "About", href: "#about" },
   { name: "Showcase", href: "#showcase" },
-  // { name: "Artwork", href: "#artwork" },
+  { name: "Contact", href: "#contact" },
   // { name: "Blog", href: "#blog" },
 ];
 
@@ -47,14 +47,6 @@ const Header = () => {
                 </Link>
               ))}
             </ul>
-            <div className="flex gap-2">
-              <Link
-                className={buttonVariants({ variant: "default" })}
-                href="#contact"
-              >
-                Contact
-              </Link>
-            </div>
           </div>
         </nav>
         {/* mobile menu */}
@@ -93,19 +85,6 @@ const Header = () => {
                       {item.name}
                     </Link>
                   ))}
-                </div>
-                <div className="border-t px-4 pt-4">
-                  <div className="mt-2 flex flex-col gap-2">
-                    <Link
-                      className={cn(
-                        buttonVariants({ variant: "default" }),
-                        "py-5"
-                      )}
-                      href="#contact"
-                    >
-                      Contact
-                    </Link>
-                  </div>
                 </div>
               </SheetContent>
             </Sheet>
