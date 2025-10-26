@@ -1,10 +1,13 @@
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { getProductById } from "@/data/showcase-data";
+import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
+import { artworksQuery } from "@/sanity/lib/queries";
 import { ImageModal } from "./ImageModal";
 
 interface ProductPageProps {
@@ -15,7 +18,13 @@ interface ProductPageProps {
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params;
-  const product = getProductById(id);
+
+  // Fetch all artworks from Sanity
+  const { data: artworks } = await sanityFetch({ query: artworksQuery });
+
+  // Try to find the artwork by _id
+  const product = artworks?.find((item) => item._id === id);
+
   if (!product) {
     notFound();
   }
@@ -25,15 +34,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  // At this point we know it's a full Product, not a PotProduct
-  const fullProduct = product as Extract<typeof product, { title: string }>;
+  const fullProduct = product;
+  const imageUrl = urlFor(fullProduct.image).width(1200).url();
 
   return (
     <section className="min-h-screen">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <Button asChild variant="ghost">
-            <Link href={`/artwork?category=${encodeURIComponent(fullProduct.category)}`}>
+            <Link
+              href={`/artwork?category=${encodeURIComponent(fullProduct.category)}`}
+            >
               <ArrowLeft className="h-4 w-4" />
               Back to {fullProduct.category}
             </Link>
@@ -44,12 +55,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="grid items-start gap-12 lg:grid-cols-2">
               {/* Image */}
               <div className="space-y-4">
-                <ImageModal alt={fullProduct.title} src={fullProduct.image}>
+                <ImageModal alt={fullProduct.title} src={imageUrl}>
                   <div className="cursor-pointer">
                     <img
                       alt={fullProduct.title}
                       className="w-full rounded-lg object-cover"
-                      src={fullProduct.image}
+                      src={imageUrl}
                       style={{ aspectRatio: "1/1" }}
                     />
                   </div>

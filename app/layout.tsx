@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, Ojuju } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { SanityLive } from "@/sanity/lib/live";
 
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
       >
         {children}
         <Toaster position="bottom-right" />
+        <SanityLive />
       </body>
     </html>
   );

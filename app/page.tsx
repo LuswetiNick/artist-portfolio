@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import About from "@/components/about";
 import Blogs from "@/components/blogs";
+// import Blogs from "@/components/blogs";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 import Hero from "@/components/hero";
