@@ -1,22 +1,53 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  type Product,
-  productData,
-  type ShowcaseProduct,
-} from "@/data/showcase-data";
+import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
+import { artworksQuery, featuredPotsQuery } from "@/sanity/lib/queries";
 import { ImageModal } from "./image-modal";
 import { buttonVariants } from "./ui/button";
 
-const Showcase = () => {
+interface ShowcaseItem {
+  _id: string;
+  category: string;
+  image: string;
+  title?: string;
+}
+
+const Showcase = async () => {
+  // Fetch artworks and pots from Sanity
+  const { data: artworks } = await sanityFetch({ query: artworksQuery });
+  const { data: pots } = await sanityFetch({ query: featuredPotsQuery });
+
+  // Build a combined array with category and image data
+  const allItems: ShowcaseItem[] = [
+    ...(artworks || [])
+      .filter((item) => item.category && item.image)
+      .map((item) => ({
+        _id: item._id,
+        category: item.category || "Uncategorized",
+        image: item.image ? urlFor(item.image).width(1200).url() || "" : "",
+        title: item.title || undefined,
+      })),
+    ...(pots || [])
+      .filter((item) => item.image)
+      .map((item) => {
+        const imageUrl = item.image ? urlFor(item.image).width(1200).url() : "";
+        
+        return {
+          _id: item._id,
+          category: "Pots",
+          image: imageUrl || "",
+        };
+      }),
+  ];
+
   // Build a map of category -> first item in that category
   const categoryEntries = Array.from(
-    productData
+    allItems
       .reduce(
         (map, item) =>
           map.has(item.category) ? map : map.set(item.category, item),
-        new Map<string, ShowcaseProduct>()
+        new Map<string, ShowcaseItem>()
       )
       .entries()
   );
@@ -46,85 +77,75 @@ const Showcase = () => {
         </div>
 
         <div className="flex w-full flex-col">
-          {categoryEntries.map(([category, item], idx) => {
-            const isPot = category === "Pots";
-            const isProduct = (i: ShowcaseProduct): i is Product =>
-              "title" in i;
-            const reversed = idx % 2 === 1; // alternate layout per row
+          {categoryEntries
+            .filter(([, item]) => item.image) // Filter out items without images
+            .map(([category, item], idx) => {
+              const isPot = category === "Pots";
+              const reversed = idx % 2 === 1; // alternate layout per row
 
-            const framedImage = (
-              <div>
-                <div className="relative aspect-video overflow-hidden border">
-                  {/* Category label over image */}
-                  {/* <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center p-3">
-                    <span className="rounded-full bg-black/60 px-4 py-1 font-semibold text-sm text-white backdrop-blur">
-                      {category}
-                    </span>
-                  </div> */}
-                  <Image
-                    alt={
-                      isPot
-                        ? `Pot ${item.id}`
-                        : isProduct(item)
-                          ? item.title
-                          : `${category}`
-                    }
-                    className="object-cover"
-                    fill
-                    sizes="(min-width: 1024px) 800px, 100vw"
-                    src={item.image}
-                  />
-                </div>
-              </div>
-            );
-
-            const imageContent = isPot ? (
-              <ImageModal alt={`Pot ${item.id}`} src={item.image}>
-                {framedImage}
-              </ImageModal>
-            ) : isProduct(item) ? (
-              <Link href={`/artwork/${item.id}`}>{framedImage}</Link>
-            ) : (
-              framedImage
-            );
-
-            const textBlock = (
-              <div>
-                <div className="mb-8 px-3 md:mb-0 md:px-14">
-                  <h2 className="mb-6 font-bold text-3xl tracking-tight sm:text-5xl">
-                    {category}
-                  </h2>
-                  <div className="mb-8 space-y-4">
-                    <Link
-                      className={buttonVariants({ variant: "default" })}
-                      href={`/artwork?category=${encodeURIComponent(category)}`}
-                    >
-                      View all {category}
-                    </Link>
+              const framedImage = (
+                <div>
+                  <div className="relative aspect-video overflow-hidden border">
+                    <Image
+                      alt={isPot ? `Pot ${item._id}` : item.title || category}
+                      className="object-cover"
+                      fill
+                      sizes="(min-width: 1024px) 800px, 100vw"
+                      src={item.image}
+                    />
                   </div>
                 </div>
-              </div>
-            );
+              );
 
-            return (
-              <section
-                className="container mx-auto grid grid-cols-1 items-center gap-12 pt-16 pb-16 md:pt-24 md:pb-24 lg:grid-cols-2"
-                key={category}
-              >
-                {reversed ? (
-                  <>
-                    {imageContent}
-                    {textBlock}
-                  </>
-                ) : (
-                  <>
-                    {textBlock}
-                    {imageContent}
-                  </>
-                )}
-              </section>
-            );
-          })}
+              const imageContent = isPot ? (
+                <ImageModal alt={`Pot ${item._id}`} src={item.image}>
+                  {framedImage}
+                </ImageModal>
+              ) : (
+                <Link
+                  href={`/artwork?category=${encodeURIComponent(category)}`}
+                >
+                  {framedImage}
+                </Link>
+              );
+
+              const textBlock = (
+                <div>
+                  <div className="mb-8 px-3 md:mb-0 md:px-14">
+                    <h2 className="mb-6 font-bold text-3xl tracking-tight sm:text-5xl">
+                      {category}
+                    </h2>
+                    <div className="mb-8 space-y-4">
+                      <Link
+                        className={buttonVariants({ variant: "default" })}
+                        href={`/artwork?category=${encodeURIComponent(category)}`}
+                      >
+                        View all {category}
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+
+              return (
+                <section
+                  className="container mx-auto grid grid-cols-1 items-center gap-12 pt-16 pb-16 md:pt-24 md:pb-24 lg:grid-cols-2"
+                  key={category}
+                >
+                  {reversed ? (
+                    <>
+                      {imageContent}
+                      {textBlock}
+                    </>
+                  ) : (
+                    <>
+                      {textBlock}
+                      {imageContent}
+                    </>
+                  )}
+                </section>
+              );
+            })}
         </div>
       </div>
     </section>

@@ -15,8 +15,8 @@ import {
 const TopMenu = [
   { name: "About", href: "#about" },
   { name: "Showcase", href: "#showcase" },
+  { name: "Blog", href: "#blog" },
   { name: "Contact", href: "#contact" },
-  // { name: "Blog", href: "#blog" },
 ];
 
 const Header = () => {

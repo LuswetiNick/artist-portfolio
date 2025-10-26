@@ -19,7 +19,8 @@
     "rules": {
       "recommended": true,
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noExplicitAny": "off"
       },
       "nursery": {
         "useConsistentTypeDefinitions": "off",
@@ -30,7 +31,9 @@
       },
       "style": {
         "useNumericSeparators": "off",
-        "noNestedTernary": "off"
+        "noNestedTernary": "off",
+        "noMagicNumbers": "off",
+        "useConsistentArrayType": "off"
       }
     },
     "domains": {

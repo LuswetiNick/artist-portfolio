@@ -4,30 +4,29 @@ import Link from "next/link";
 import { ImageModal } from "@/components/image-modal";
 import ProductCard from "@/components/product-card";
 import { Button } from "@/components/ui/button";
-import type { Product } from "@/data/showcase-data";
-import { productData } from "@/data/showcase-data";
+import { urlFor } from "@/sanity/lib/image";
+import { sanityFetch } from "@/sanity/lib/live";
+import { artworksQuery, potsQuery } from "@/sanity/lib/queries";
 
-export default function Artwork({
+export default async function Artwork({
   searchParams,
 }: {
   searchParams?: { category?: string };
 }) {
   const category = searchParams?.category;
 
-  const fullProducts = productData.filter(
-    (product): product is Product => "title" in product
-  );
+  // Fetch artworks and pots from Sanity
+  const { data: artworks } = await sanityFetch({ query: artworksQuery });
+  const { data: pots } = await sanityFetch({ query: potsQuery });
 
   const title = category ? category : "The Art";
 
-  const filteredFullProducts = category
-    ? fullProducts.filter((p) => p.category === category)
-    : fullProducts;
+  // Filter artworks by category if specified
+  const filteredArtworks = category
+    ? artworks?.filter((p) => p.category === category) || []
+    : artworks || [];
 
-  const potProducts =
-    category === "Pots"
-      ? productData.filter((p) => p.category === "Pots" && !("title" in p))
-      : [];
+  const potProducts = category === "Pots" ? pots || [] : [];
 
   return (
     <div className="min-h-screen">
@@ -50,16 +49,16 @@ export default function Artwork({
               <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
                 {potProducts.map((item) => (
                   <ImageModal
-                    alt={`Pot ${item.id}`}
-                    key={item.id}
-                    src={item.image}
+                    alt={`Pot ${item._id}`}
+                    key={item._id}
+                    src={urlFor(item.image).width(800).url()}
                   >
                     <div className="group relative transform cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
                       <Image
-                        alt={`Pot ${item.id}`}
+                        alt={`Pot ${item._id}`}
                         className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-110"
                         height={500}
-                        src={item.image}
+                        src={urlFor(item.image).width(800).url()}
                         width={500}
                       />
                     </div>
@@ -69,10 +68,10 @@ export default function Artwork({
             ) : (
               <p>No pots found.</p>
             )
-          ) : filteredFullProducts.length > 0 ? (
+          ) : filteredArtworks.length > 0 ? (
             <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-              {filteredFullProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              {filteredArtworks.map((product) => (
+                <ProductCard key={product._id} product={product} />
               ))}
             </div>
           ) : (
