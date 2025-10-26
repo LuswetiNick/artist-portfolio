@@ -1,4 +1,4 @@
-import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -15,7 +15,7 @@ interface BlogPostPageProps {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
+  const { slug } = params;
 
   // Fetch blog post from Sanity by slug
   const { data: post } = await sanityFetch({
@@ -36,7 +36,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     : "Date not available";
 
   // Get image URL if featured image exists
-  const imageUrl = post.featuredImage
+  const imageUrl = post.featuredImage?.asset
     ? urlFor(post.featuredImage).width(1200).height(675).url()
     : null;
 

@@ -17,7 +17,7 @@ interface ProductPageProps {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = await params;
+  const { id } = params;
 
   // Fetch all artworks from Sanity
   const { data: artworks } = await sanityFetch({ query: artworksQuery });
@@ -29,12 +29,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  // If it's a Pot product, redirect to artwork page since Pots don't have detail pages
-  if (product.category === "Pots") {
+  const fullProduct = product;
+
+  // Check if image exists
+  if (!fullProduct.image) {
     notFound();
   }
 
-  const fullProduct = product;
   const imageUrl = urlFor(fullProduct.image).width(1200).url();
 
   return (
@@ -43,7 +44,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <Button asChild variant="ghost">
             <Link
-              href={`/artwork?category=${encodeURIComponent(fullProduct.category)}`}
+              href={`/artwork?category=${encodeURIComponent(fullProduct.category || "")}`}
             >
               <ArrowLeft className="h-4 w-4" />
               Back to {fullProduct.category}
@@ -55,13 +56,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="grid items-start gap-12 lg:grid-cols-2">
               {/* Image */}
               <div className="space-y-4">
-                <ImageModal alt={fullProduct.title} src={imageUrl}>
+                <ImageModal alt={fullProduct.title || "Artwork"} src={imageUrl}>
                   <div className="cursor-pointer">
-                    <img
-                      alt={fullProduct.title}
+                    <Image
+                      alt={fullProduct.title || "Artwork"}
                       className="w-full rounded-lg object-cover"
+                      height={500}
                       src={imageUrl}
                       style={{ aspectRatio: "1/1" }}
+                      width={500}
                     />
                   </div>
                 </ImageModal>

@@ -4,12 +4,14 @@ import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { Card } from "./ui/card";
 
+import type { Slug } from "@/sanity/types";
+
 interface SanityBlogPost {
   _id: string;
   title: string | null;
-  slug: { current: string } | null;
+  slug: Slug | null;
   excerpt: string | null;
-  publishedAt: string;
+  publishedAt: string | null;
   featuredImage?: any;
   body?: any[];
 }
@@ -25,11 +27,13 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
     return null;
   }
 
-  const formattedDate = new Date(post.publishedAt).toLocaleDateString("en-KE", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const formattedDate = post.publishedAt 
+    ? new Date(post.publishedAt).toLocaleDateString("en-KE", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "No date";
 
   // Get image URL
   const imageUrl = post.featuredImage
@@ -40,7 +44,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
     <Card className="group relative transform overflow-hidden p-0 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
       <div className="aspect-[4/3] overflow-hidden">
         <Image
-          alt={post.title!}
+          alt={post.title || "Blog post"}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           height={500}
           src={imageUrl}
@@ -51,7 +55,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
         <div className="space-y-2">
           <Link
             className="font-semibold text-xl transition-colors group-hover:text-primary"
-            href={`/blog/${post.slug!.current}`}
+            href={`/blog/${post.slug?.current || ""}`}
           >
             {post.title}
           </Link>

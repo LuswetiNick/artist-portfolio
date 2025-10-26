@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import type { Product } from "@/data/showcase-data";
 import {
   Dialog,
   DialogContent,
@@ -10,6 +9,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+
+interface Product {
+  title: string;
+  image: string;
+}
 
 interface WhatsappDialogProps {
   product: Product;
