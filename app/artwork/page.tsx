@@ -11,9 +11,10 @@ import { artworksQuery, potsQuery } from "@/sanity/lib/queries";
 export default async function Artwork({
   searchParams,
 }: {
-  searchParams?: { category?: string };
+  searchParams?: Promise<{ category?: string }>;
 }) {
-  const category = searchParams?.category;
+  const params = await searchParams;
+  const category = params?.category;
 
   // Fetch artworks and pots from Sanity
   const { data: artworks } = await sanityFetch({ query: artworksQuery });
@@ -49,9 +50,9 @@ export default async function Artwork({
             potProducts.length > 0 ? (
               <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
                 {potProducts.map((item) => {
-                  const imageUrl = item.image
-                    ? urlFor(item.image).width(800).url()
-                    : "";
+                  if (!item.image) return null;
+                  const imageUrl = urlFor(item.image).width(800).url();
+                  if (!imageUrl) return null;
                   return (
                     <ImageModal
                       alt={`Pot ${item._id}`}
@@ -63,6 +64,7 @@ export default async function Artwork({
                           alt={`Pot ${item._id}`}
                           className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-110"
                           height={500}
+                          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                           src={imageUrl}
                           width={500}
                         />
