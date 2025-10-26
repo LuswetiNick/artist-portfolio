@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PortableText } from "next-sanity";
+import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { aboutQuery } from "@/sanity/lib/queries";
