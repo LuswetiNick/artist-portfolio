@@ -26,7 +26,8 @@ export default async function Artwork({
     ? artworks?.filter((p) => p.category === category) || []
     : artworks || [];
 
-  const potProducts = category === "Pots" ? pots || [] : [];
+  const potProducts =
+    category === "Pots" ? (pots || []).filter((p) => p?.image?.asset) : [];
 
   return (
     <div className="min-h-screen">
@@ -47,23 +48,28 @@ export default async function Artwork({
           {category === "Pots" ? (
             potProducts.length > 0 ? (
               <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-                {potProducts.map((item) => (
-                  <ImageModal
-                    alt={`Pot ${item._id}`}
-                    key={item._id}
-                    src={urlFor(item.image).width(800).url()}
-                  >
-                    <div className="group relative transform cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
-                      <Image
-                        alt={`Pot ${item._id}`}
-                        className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        height={500}
-                        src={urlFor(item.image).width(800).url()}
-                        width={500}
-                      />
-                    </div>
-                  </ImageModal>
-                ))}
+                {potProducts.map((item) => {
+                  const imageUrl = item.image
+                    ? urlFor(item.image).width(800).url()
+                    : "";
+                  return (
+                    <ImageModal
+                      alt={`Pot ${item._id}`}
+                      key={item._id}
+                      src={imageUrl}
+                    >
+                      <div className="group relative transform cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                        <Image
+                          alt={`Pot ${item._id}`}
+                          className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          height={500}
+                          src={imageUrl}
+                          width={500}
+                        />
+                      </div>
+                    </ImageModal>
+                  );
+                })}
               </div>
             ) : (
               <p>No pots found.</p>

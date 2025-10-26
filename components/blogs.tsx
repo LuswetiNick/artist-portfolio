@@ -25,18 +25,9 @@ const Blogs = async () => {
         <div className="mx-auto mb-16 h-1 w-20 rounded-full bg-primary" />
         {validPosts.length > 0 && (
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-            {validPosts
-              .filter((post) => {
-                const hasSlug = post.slug?.current;
-                return hasSlug && post.title;
-              })
-              .map((post) => {
-                const slug = post.slug?.current;
-                if (!slug) {
-                  return null;
-                }
-                return <BlogPostCard key={slug} post={post as any} />;
-              })}
+            {validPosts.map((post) => (
+              <BlogPostCard key={post.slug?.current} post={post} />
+            ))}
           </div>
         )}
         <div className="mt-12 text-center">

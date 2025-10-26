@@ -6,8 +6,8 @@ import { Card } from "./ui/card";
 
 interface SanityArtwork {
   _id: string;
-  title: string;
-  description: string;
+  title: string | null;
+  description: string | null;
   image: any; // Sanity image object
 }
 
@@ -25,7 +25,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <Link href={`/artwork/${product._id}`}>
         <div className="relative aspect-[4/3] overflow-hidden bg-muted">
           <Image
-            alt={product.title}
+            alt={product.title || "Artwork"}
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             height={500}
             src={imageUrl}
@@ -37,11 +37,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="space-y-4">
           <Link href={`/artwork/${product._id}`}>
             <h3 className="font-ojuju font-semibold text-lg leading-tight transition-colors group-hover:text-primary">
-              {product.title}
+              {product.title || "Untitled"}
             </h3>
           </Link>
           <p className="line-clamp-2 text-muted-foreground text-sm">
-            {product.description}
+            {product.description || ""}
           </p>
         </div>
       </div>

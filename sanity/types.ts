@@ -535,7 +535,7 @@ export type RecentBlogPostsQueryResult = Array<{
   publishedAt: string | null;
 }>;
 // Variable: blogSlugsQuery
-// Query: *[_type == "blog"].slug.current
+// Query: *[_type == "blog" && defined(slug.current)].slug.current
 export type BlogSlugsQueryResult = Array<string | null>;
 // Variable: aboutQuery
 // Query: *[_type == "about"][0] {  _id,  _createdAt,  _updatedAt,  fullname,  profileImage,  bio,  availability,  email,  socialLinks}
@@ -583,8 +583,8 @@ export type AboutQueryResult = {
   } | null;
 } | null;
 // Variable: artworkSlugsQuery
-// Query: *[_type == "artwork"].slug.current
-export type ArtworkSlugsQueryResult = Array<string | null>;
+// Query: [_type == "artwork" && defined(slug.current)].slug.current
+export type ArtworkSlugsQueryResult = Array<never>;
 // Variable: potSlugsQuery
 // Query: *[_type == "pots"]._id
 export type PotSlugsQueryResult = Array<string>;
@@ -603,9 +603,9 @@ declare module "@sanity/client" {
     "*[_type == \"blog\"] | order(publishedAt desc) {\n  _id,\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  excerpt,\n  body,\n  featuredImage,\n  publishedAt\n}": BlogPostsQueryResult;
     "*[_type == \"blog\" && slug.current == $slug][0] {\n  _id,\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  excerpt,\n  body,\n  featuredImage,\n  publishedAt\n}": BlogPostBySlugQueryResult;
     "*[_type == \"blog\"] | order(publishedAt desc) [0...$limit] {\n  _id,\n  title,\n  slug,\n  excerpt,\n  featuredImage,\n  publishedAt\n}": RecentBlogPostsQueryResult;
-    "*[_type == \"blog\"].slug.current": BlogSlugsQueryResult;
+    "*[_type == \"blog\" && defined(slug.current)].slug.current": BlogSlugsQueryResult;
     "*[_type == \"about\"][0] {\n  _id,\n  _createdAt,\n  _updatedAt,\n  fullname,\n  profileImage,\n  bio,\n  availability,\n  email,\n  socialLinks\n}": AboutQueryResult;
-    "*[_type == \"artwork\"].slug.current": ArtworkSlugsQueryResult;
+    "[_type == \"artwork\" && defined(slug.current)].slug.current": ArtworkSlugsQueryResult;
     "*[_type == \"pots\"]._id": PotSlugsQueryResult;
   }
 }
