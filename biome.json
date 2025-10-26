@@ -33,7 +33,8 @@
         "useNumericSeparators": "off",
         "noNestedTernary": "off",
         "noMagicNumbers": "off",
-        "useConsistentArrayType": "off"
+        "useConsistentArrayType": "off",
+        "useBlockStatements": "off"
       }
     },
     "domains": {

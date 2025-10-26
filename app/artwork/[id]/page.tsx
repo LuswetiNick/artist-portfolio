@@ -17,7 +17,7 @@ interface ProductPageProps {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   // Fetch all artworks from Sanity
   const { data: artworks } = await sanityFetch({ query: artworksQuery });

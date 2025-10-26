@@ -153,6 +153,6 @@ export const aboutQuery = defineQuery(`*[_type == "about"][0] {
 
 // Slug helpers
 export const artworkSlugsQuery = defineQuery(
-  `[_type == "artwork" && defined(slug.current)].slug.current`
+  `*[_type == "artwork" && defined(slug.current)].slug.current`
 );
 export const potSlugsQuery = defineQuery(`*[_type == "pots"]._id`);

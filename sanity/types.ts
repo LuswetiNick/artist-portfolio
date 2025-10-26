@@ -583,8 +583,8 @@ export type AboutQueryResult = {
   } | null;
 } | null;
 // Variable: artworkSlugsQuery
-// Query: [_type == "artwork" && defined(slug.current)].slug.current
-export type ArtworkSlugsQueryResult = Array<never>;
+// Query: *[_type == "artwork" && defined(slug.current)].slug.current
+export type ArtworkSlugsQueryResult = Array<string | null>;
 // Variable: potSlugsQuery
 // Query: *[_type == "pots"]._id
 export type PotSlugsQueryResult = Array<string>;
@@ -605,7 +605,7 @@ declare module "@sanity/client" {
     "*[_type == \"blog\"] | order(publishedAt desc) [0...$limit] {\n  _id,\n  title,\n  slug,\n  excerpt,\n  featuredImage,\n  publishedAt\n}": RecentBlogPostsQueryResult;
     "*[_type == \"blog\" && defined(slug.current)].slug.current": BlogSlugsQueryResult;
     "*[_type == \"about\"][0] {\n  _id,\n  _createdAt,\n  _updatedAt,\n  fullname,\n  profileImage,\n  bio,\n  availability,\n  email,\n  socialLinks\n}": AboutQueryResult;
-    "[_type == \"artwork\" && defined(slug.current)].slug.current": ArtworkSlugsQueryResult;
+    "*[_type == \"artwork\" && defined(slug.current)].slug.current": ArtworkSlugsQueryResult;
     "*[_type == \"pots\"]._id": PotSlugsQueryResult;
   }
 }
