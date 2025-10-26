@@ -2,7 +2,7 @@ import { ArrowLeft, Calendar } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PortableText } from "next-sanity";
+import { PortableText } from "@portabletext/react";
 import { Button } from "@/components/ui/button";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
