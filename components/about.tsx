@@ -1,11 +1,11 @@
-import Image from "next/image";
 import { PortableText } from "@portabletext/react";
+import { Instagram, Mail, Twitter } from "lucide-react";
+import Image from "next/image";
+// import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { aboutQuery } from "@/sanity/lib/queries";
-import { Mail, Twitter, Instagram } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
 
 const About = async () => {
   const { data: about } = await sanityFetch({ query: aboutQuery });
@@ -60,8 +60,8 @@ const About = async () => {
                 {about.fullname || "the artist"}
               </span>
             </h3>
-              {/* Availability Badge */}
-            {about.availability && (
+            {/* Availability Badge */}
+            {/* {about.availability && (
               <div className="mb-6">
                 <Badge
                   variant={
@@ -78,48 +78,44 @@ const About = async () => {
                   {about.availability === "unavailable" && "Not looking"}
                 </Badge>
               </div>
-            )}
+            )} */}
             {about.bio && (
               <div className="mb-6 text-base leading-relaxed">
                 <PortableText value={about.bio} />
               </div>
             )}
 
-          
-
             {/* Contact & Social Links */}
             <div className="flex flex-wrap items-center gap-3">
               {about.email && (
                 <Link
-                  href={`mailto:${about.email}`}
                   className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-gray-700 transition-all hover:bg-primary hover:text-white"
+                  href={`mailto:${about.email}`}
                 >
                   <Mail className="h-5 w-5" />
-                  <span className="text-sm sm:text-base">
-                    {about.email}
-                  </span>
+                  <span className="text-sm sm:text-base">{about.email}</span>
                 </Link>
               )}
 
               {/* Social Links */}
               {about.socialLinks?.twitter && (
                 <Link
-                  href={about.socialLinks.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all hover:bg-primary hover:text-white"
                   aria-label="Twitter/X"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all hover:bg-primary hover:text-white"
+                  href={about.socialLinks.twitter}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <Twitter className="h-5 w-5" />
                 </Link>
               )}
               {about.socialLinks?.instagram && (
                 <Link
-                  href={about.socialLinks.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all hover:bg-primary hover:text-white"
                   aria-label="Instagram"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all hover:bg-primary hover:text-white"
+                  href={about.socialLinks.instagram}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
                   <Instagram className="h-5 w-5" />
                 </Link>
