@@ -19,7 +19,7 @@ export function getDefaultMetadata(): Metadata {
       url: siteConfig.url,
       siteName: siteConfig.title,
 
-      locale: "en-US",
+      locale: "en-KE",
       type: "website",
     },
     twitter: {
@@ -36,10 +36,7 @@ export function getDefaultMetadata(): Metadata {
       },
     },
     icons: {
-      icon: [
-        { url: "/images/logo.png" },
-        { url: "/favicon.ico" },
-      ],
+      icon: [{ url: "/images/logo.png" }, { url: "/favicon.ico" }],
       apple: "/images/logo.png",
     },
   } as Metadata;
