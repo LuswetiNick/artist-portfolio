@@ -44,6 +44,21 @@ export default defineType({
       },
     }),
 
+    // Optional gallery: multiple images for a single blog post
+    defineField({
+      name: "images",
+      title: "Images",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+        },
+      ],
+      description:
+        "Optional gallery of images for the post (keeps `featuredImage` for compatibility)",
+    }),
+
     defineField({
       name: "publishedAt",
       title: "Published Date",

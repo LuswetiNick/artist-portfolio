@@ -1,10 +1,12 @@
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { buildMetadata } from "@/lib/seo";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { artworksQuery } from "@/sanity/lib/queries";
@@ -14,6 +16,26 @@ interface ProductPageProps {
   params: Promise<{
     id: string;
   }>;
+}
+
+export async function generateMetadata({
+  params,
+}: ProductPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const { data: artworks } = await sanityFetch({ query: artworksQuery });
+  const product = artworks?.find((item) => item._id === id);
+  if (!product) {
+    return { title: "Artwork not found" } as Metadata;
+  }
+  const imageUrl = product.image
+    ? urlFor(product.image).width(1200).url()
+    : undefined;
+  return buildMetadata({
+    title: product.title || undefined,
+    description: product.description || undefined,
+    pathname: `/artwork/${product._id}`,
+    image: imageUrl,
+  });
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {

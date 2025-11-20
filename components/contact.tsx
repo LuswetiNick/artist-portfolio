@@ -1,40 +1,49 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, Send } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { Send } from "lucide-react";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import formSchema, { type FormData } from "@/lib/validation";
+import z from "zod";
+import { sendContactEmail } from "@/app/actions/sendEmail";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Field, FieldError, FieldGroup, FieldLabel } from "./ui/field";
 import { Input } from "./ui/input";
-import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 
-const Contact = ({
-  sendMail,
-}: {
-  sendMail: (
-    formData: FormData
-  ) => Promise<{ success: boolean; error: string | null }>;
-}) => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+const contactFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.email("Invalid email address"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+type ContactFormData = z.infer<typeof contactFormSchema>;
+
+const Contact = () => {
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
   });
-  const onSubmit = async (formData: FormData) => {
-    const result = await sendMail(formData);
-    if (result.success) {
-      toast.success("Message sent successfully");
-      reset();
-    } else {
-      toast.error(result.error);
+  const { isSubmitting: loading } = form.formState;
+
+  async function onSubmit(data: ContactFormData) {
+    try {
+      const result = await sendContactEmail(data);
+
+      if (result.success) {
+        toast.success("Message sent successfully! I'll get back to you soon.");
+        form.reset();
+      } else {
+        toast.error(result.error || "Failed to send message");
+      }
+    } catch {
+      toast.error("An unexpected error occurred");
     }
-  };
+  }
   return (
     <section className="px-6 py-20" id="contact">
       <div className="mx-auto max-w-7xl">
@@ -48,76 +57,85 @@ const Contact = ({
         </p>
         <div className="flex w-full items-center justify-center">
           <div className="max-w-xl">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Card className="w-[500px]">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 font-bold font-heading text-foreground">
-                    <Send className="h-5 w-5 text-primary" />
-                    Send me a message
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4 space-y-4 md:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label className="font-body font-medium" htmlFor="name">
-                        Name *
-                      </Label>
-                      <Input
-                        className="font-body"
-                        id="name"
-                        {...register("name")}
-                      />
-                      {errors.name && (
-                        <span className="text-destructive">
-                          {errors.name.message}
-                        </span>
+            <Card className="w-[500px]">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 font-bold font-heading text-foreground">
+                  <Send className="h-5 w-5 text-primary" />
+                  Send me a message
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
+                  <FieldGroup>
+                    <Controller
+                      control={form.control}
+                      name="name"
+                      render={({ field, fieldState }) => (
+                        <Field data-invalid={fieldState.invalid}>
+                          <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                          <Input
+                            id={field.name}
+                            {...field}
+                            aria-invalid={fieldState.invalid}
+                            disabled={loading}
+                          />
+                          {fieldState.invalid && (
+                            <FieldError errors={[fieldState.error]} />
+                          )}
+                        </Field>
                       )}
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="font-body font-medium" htmlFor="email">
-                        Email *
-                      </Label>
-                      <Input
-                        className="font-body"
-                        id="email"
-                        {...register("email")}
-                        type="email"
-                      />
-                      {errors.email && (
-                        <span className="text-destructive">
-                          {errors.email.message}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="font-body font-medium" htmlFor="message">
-                      Message *
-                    </Label>
-                    <Textarea
-                      className="resize-none font-body"
-                      id="message"
-                      {...register("message")}
-                      placeholder="Tell me about your project, opportunity, or just say hello!"
-                      rows={6}
                     />
-                  </div>
-
+                    <Controller
+                      control={form.control}
+                      name="email"
+                      render={({ field, fieldState }) => (
+                        <Field data-invalid={fieldState.invalid}>
+                          <FieldLabel htmlFor={field.name}>
+                            Email Address
+                          </FieldLabel>
+                          <Input
+                            id={field.name}
+                            {...field}
+                            aria-invalid={fieldState.invalid}
+                            disabled={loading}
+                            type="email"
+                          />
+                          {fieldState.invalid && (
+                            <FieldError errors={[fieldState.error]} />
+                          )}
+                        </Field>
+                      )}
+                    />
+                    <Controller
+                      control={form.control}
+                      name="message"
+                      render={({ field, fieldState }) => (
+                        <Field data-invalid={fieldState.invalid}>
+                          <FieldLabel htmlFor={field.name}>Message</FieldLabel>
+                          <Textarea
+                            id={field.name}
+                            {...field}
+                            aria-invalid={fieldState.invalid}
+                            className="resize-none"
+                            disabled={loading}
+                          />
+                          {fieldState.invalid && (
+                            <FieldError errors={[fieldState.error]} />
+                          )}
+                        </Field>
+                      )}
+                    />
+                  </FieldGroup>
                   <Button
-                    className="mt-4 w-full font-body font-medium"
-                    size="lg"
+                    className="mt-4 w-full"
+                    disabled={loading}
                     type="submit"
                   >
-                    {isSubmitting ? (
-                      <Loader2 className="animate-spin" />
-                    ) : (
-                      "Send Message"
-                    )}
+                    {loading ? "Sending..." : "Send Message"}
                   </Button>
-                </CardContent>
-              </Card>
-            </form>
+                </form>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

@@ -1,12 +1,31 @@
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ImageModal } from "@/components/image-modal";
 import ProductCard from "@/components/product-card";
 import { Button } from "@/components/ui/button";
+import { buildMetadata } from "@/lib/seo";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 import { artworksQuery, potsQuery } from "@/sanity/lib/queries";
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams?: Promise<{ category?: string }>;
+}): Promise<Metadata> {
+  const params = await searchParams;
+  const category = params?.category;
+  const title = category ? category : "The Art";
+  return buildMetadata({
+    title,
+    description: `Explore ${title} - original artwork and contemporary pieces.`,
+    pathname: category
+      ? `/artwork?category=${encodeURIComponent(category)}`
+      : "/artwork",
+  });
+}
 
 export default async function Artwork({
   searchParams,

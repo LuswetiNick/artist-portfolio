@@ -1,9 +1,18 @@
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { BlogPostCard } from "@/components/blog-post-card";
 import { Button } from "@/components/ui/button";
+import { buildMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/live";
 import { blogPostsQuery } from "@/sanity/lib/queries";
+
+export const metadata: Metadata = buildMetadata({
+  title: "Blog",
+  description:
+    "Follow my creative journey, artistic process, and thoughts on contemporary art and life as an artist.",
+  pathname: "/blog",
+});
 
 export default async function BlogPage() {
   // Fetch blog posts from Sanity

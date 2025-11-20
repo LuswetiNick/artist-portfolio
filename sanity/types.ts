@@ -67,6 +67,19 @@ export type Blog = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
   publishedAt?: string;
 };
 
