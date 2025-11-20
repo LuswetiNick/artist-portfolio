@@ -88,11 +88,12 @@ const Showcase = async () => {
 
               const framedImage = (
                 <div className="w-full">
-                  <div className="relative aspect-video overflow-hidden rounded-lg border shadow-md">
+                  <div className="relative aspect-video overflow-hidden rounded-md border shadow-md sm:rounded-lg">
                     <Image
                       alt={isPot ? `Pot ${item._id}` : item.title || category}
                       className="object-cover"
                       fill
+                      priority={idx === 0}
                       sizes="(min-width: 1024px) 50vw, 100vw"
                       src={item.image}
                     />
@@ -114,19 +115,20 @@ const Showcase = async () => {
 
               const textBlock = (
                 <div className="w-full">
-                  <div className="mb-8 flex items-center justify-between px-3 md:mb-0 md:flex-col md:items-start md:px-14">
-                    <h2 className="font-bold text-2xl tracking-tight sm:mb-6 sm:text-3xl lg:text-4xl xl:text-5xl">
+                  <div className="mb-4 flex items-center justify-between gap-3 px-2 sm:mb-6 sm:px-3 md:mb-0 md:flex-col md:items-start md:px-14">
+                    <h2 className="font-bold text-xl tracking-tight sm:text-2xl md:mb-6 md:text-3xl lg:text-4xl xl:text-5xl">
                       {category}
                     </h2>
-                    <div className="sm:mb-8">
+                    <div className="shrink-0 md:mb-8">
                       <Link
                         className={buttonVariants({
                           variant: "default",
-                          size: "lg",
+                          size: "default",
+                          className: "text-sm sm:text-base md:text-lg",
                         })}
                         href={`/artwork?category=${encodeURIComponent(category)}`}
                       >
-                        View all {category}
+                        View all
                       </Link>
                     </div>
                   </div>
@@ -135,7 +137,7 @@ const Showcase = async () => {
 
               return (
                 <section
-                  className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-6 px-4 pt-8 pb-8 sm:gap-8 sm:pt-12 sm:pb-12 md:gap-12 md:pt-16 md:pb-16 lg:grid-cols-2 lg:pt-24 lg:pb-24"
+                  className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-4 px-2 pt-6 pb-6 sm:gap-6 sm:px-4 sm:pt-8 sm:pb-8 md:gap-8 md:pt-12 md:pb-12 lg:grid-cols-2 lg:gap-12 lg:px-4 lg:pt-16 lg:pb-16 xl:pt-24 xl:pb-24"
                   key={category}
                 >
                   {/* On mobile, always show text first, then image. On lg+, alternate based on reversed */}
