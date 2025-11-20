@@ -36,8 +36,11 @@ export function getDefaultMetadata(): Metadata {
       },
     },
     icons: {
-      icon: siteConfig.favicon,
-      apple: siteConfig.appleIcon,
+      icon: [
+        { url: "/images/logo.png" },
+        { url: "/favicon.ico" },
+      ],
+      apple: "/images/logo.png",
     },
   } as Metadata;
 }
