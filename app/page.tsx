@@ -9,7 +9,7 @@ import { buildMetadata } from "@/lib/seo";
 
 const Home = () => {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen overflow-x-hidden bg-background">
       <Hero />
       <About />
       <Showcase />

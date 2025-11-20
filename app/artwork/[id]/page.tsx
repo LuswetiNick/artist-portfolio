@@ -73,16 +73,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </Link>
           </Button>
         </div>
-        <section className="pb-16">
+        <section className="pb-8 sm:pb-12 md:pb-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid items-start gap-12 lg:grid-cols-2">
+            <div className="grid items-start gap-6 sm:gap-8 md:gap-12 lg:grid-cols-2">
               {/* Image */}
               <div className="space-y-4">
                 <ImageModal alt={fullProduct.title || "Artwork"} src={imageUrl}>
                   <div className="cursor-pointer">
                     <Image
                       alt={fullProduct.title || "Artwork"}
-                      className="w-full rounded-lg object-cover"
+                      className="w-full rounded-lg object-cover shadow-lg"
                       height={500}
                       src={imageUrl}
                       style={{ aspectRatio: "1/1" }}
@@ -93,20 +93,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </div>
 
               {/* Details */}
-              <div className="space-y-8">
-                <div className="space-y-4">
+              <div className="space-y-6 sm:space-y-8">
+                <div className="space-y-3 sm:space-y-4">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h1 className="text-balance font-bold font-ojuju text-3xl md:text-4xl">
+                      <h1 className="text-balance font-bold font-ojuju text-2xl sm:text-3xl md:text-4xl">
                         {fullProduct.title}
                       </h1>
-                      <p className="mt-2 text-lg text-muted-foreground">
+                      <p className="mt-2 text-base text-muted-foreground sm:text-lg">
                         {fullProduct.year}
                       </p>
                     </div>
                   </div>
 
-                  <p className="text-lg leading-relaxed">
+                  <p className="text-base leading-relaxed sm:text-lg">
                     {fullProduct.description}
                   </p>
                 </div>
@@ -137,9 +137,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <Separator />
 
                 {/* Specifications */}
-                <div className="space-y-4">
-                  <h3 className="font-semibold text-xl">Details</h3>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="space-y-3 sm:space-y-4">
+                  <h3 className="font-semibold text-lg sm:text-xl">Details</h3>
+                  <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-2 sm:gap-4">
                     <div>
                       <span className="text-muted-foreground">Materials:</span>
                       <p className="font-medium">{fullProduct.materials}</p>

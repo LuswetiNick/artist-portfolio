@@ -33,14 +33,14 @@ export default function ProductCard({ product }: ProductCardProps) {
           />
         </div>
       </Link>
-      <div className="p-4">
-        <div className="space-y-4">
+      <div className="p-3 sm:p-4">
+        <div className="space-y-2 sm:space-y-3">
           <Link href={`/artwork/${product._id}`}>
-            <h3 className="font-ojuju font-semibold text-lg leading-tight transition-colors group-hover:text-primary">
+            <h3 className="font-ojuju font-semibold text-base leading-tight transition-colors group-hover:text-primary sm:text-lg">
               {product.title || "Untitled"}
             </h3>
           </Link>
-          <p className="line-clamp-2 text-muted-foreground text-sm">
+          <p className="line-clamp-2 text-muted-foreground text-xs sm:text-sm">
             {product.description || ""}
           </p>
         </div>

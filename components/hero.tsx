@@ -16,17 +16,14 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20" />
       </div>
       <Header />
-      <div className="relative z-10 px-6 text-center">
+      <div className="relative z-10 w-full px-6 text-center">
         <h1 className="mb-4 font-bold text-4xl text-white tracking-tight md:text-6xl lg:text-7xl">
-          <div className="relative inline-flex">
-            <span className="relative block transform font-bold font-ojuju text-7xl transition-transform delay-200 duration-300 hover:translate-y-[-5px]">
+          <div className="relative inline-flex max-w-full">
+            <span className="relative block transform font-bold font-ojuju text-5xl transition-transform delay-200 duration-300 hover:translate-y-[-5px] sm:text-6xl md:text-7xl">
               Afrika Mosaics
             </span>
           </div>
         </h1>
-        {/* <Button className="transform font-medium text-white transition-all duration-300 hover:scale-105">
-          Explore My Work
-        </Button> */}
       </div>
       <div className="-translate-x-1/2 absolute bottom-10 left-1/2 transform animate-bounce">
         <Link className="text-white" href="#about">

@@ -67,7 +67,7 @@ export default async function Artwork({
           {/* Render pot products differently since they don't have detail pages */}
           {category === "Pots" ? (
             potProducts.length > 0 ? (
-              <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-8 grid grid-cols-1 gap-6 sm:mt-12 sm:grid-cols-2 sm:gap-8 md:mt-16 md:gap-10 lg:grid-cols-3">
                 {potProducts.map((item) => {
                   if (!item.image) return null;
                   const imageUrl = urlFor(item.image).width(800).url();
@@ -81,7 +81,7 @@ export default async function Artwork({
                       <div className="group relative transform cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
                         <Image
                           alt={`Pot ${item._id}`}
-                          className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-110 sm:h-72 md:h-80"
                           height={500}
                           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                           src={imageUrl}
@@ -96,7 +96,7 @@ export default async function Artwork({
               <p>No pots found.</p>
             )
           ) : filteredArtworks.length > 0 ? (
-            <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-6 sm:mt-12 sm:grid-cols-2 sm:gap-8 md:mt-16 md:gap-10 lg:grid-cols-3">
               {filteredArtworks.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}

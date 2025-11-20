@@ -22,7 +22,7 @@ const TopMenu = [
 const Header = () => {
   return (
     <header className="absolute top-0 left-0 z-10 flex w-full items-center justify-between px-6 py-4">
-      <div className="w-full min-w-full px-4 py-2">
+      <div className="w-full px-4 py-2">
         <nav className="hidden justify-between md:flex">
           <div className="relative">
             <Image

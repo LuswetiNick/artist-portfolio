@@ -45,7 +45,7 @@ const Contact = () => {
     }
   }
   return (
-    <section className="px-6 py-20" id="contact">
+    <section className="overflow-hidden px-6 py-20" id="contact">
       <div className="mx-auto max-w-7xl">
         <h2 className="mb-3 text-center font-bold font-ojuju text-3xl md:text-4xl">
           Get in Touch
@@ -56,8 +56,8 @@ const Contact = () => {
           availability, or just want to say hello, I'd love to hear from you.
         </p>
         <div className="flex w-full items-center justify-center">
-          <div className="max-w-xl">
-            <Card className="w-[500px]">
+          <div className="w-full max-w-xl px-4">
+            <Card className="w-full">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 font-bold font-heading text-foreground">
                   <Send className="h-5 w-5 text-primary" />

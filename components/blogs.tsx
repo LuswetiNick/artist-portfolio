@@ -17,7 +17,7 @@ const Blogs = async () => {
   );
 
   return (
-    <section className="bg-muted px-6 py-20" id="blog">
+    <section className="overflow-hidden bg-muted px-6 py-20" id="blog">
       <div className="mx-auto max-w-7xl">
         <h2 className="mb-3 text-center font-bold text-3xl md:text-4xl">
           Latest from the Blog

@@ -32,7 +32,7 @@ const Showcase = async () => {
       .filter((item) => item.image)
       .map((item) => {
         const imageUrl = item.image ? urlFor(item.image).width(1200).url() : "";
-        
+
         return {
           _id: item._id,
           category: "Pots",
@@ -53,13 +53,16 @@ const Showcase = async () => {
   );
 
   return (
-    <section className="bg-muted px-6 py-20" id="showcase">
+    <section
+      className="overflow-hidden bg-muted px-4 py-12 sm:px-6 sm:py-16 md:py-20"
+      id="showcase"
+    >
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-3 text-center font-bold font-ojuju text-3xl md:text-4xl">
+        <h2 className="mb-3 text-center font-bold font-ojuju text-2xl sm:text-3xl md:text-4xl">
           The Art
         </h2>
-        <div className="mx-auto mb-16 h-1 w-20 rounded-full bg-primary" />
-        <div className="mb-8 text-center">
+        <div className="mx-auto mb-8 h-1 w-20 rounded-full bg-primary sm:mb-12 md:mb-16" />
+        <div className="mb-8 space-y-4 text-center text-sm sm:text-base">
           <p>
             Mosaic making is what gets my creative juices really flowing. The
             mosaics are created on all manner of suitable surfaces and in
@@ -84,13 +87,13 @@ const Showcase = async () => {
               const reversed = idx % 2 === 1; // alternate layout per row
 
               const framedImage = (
-                <div>
-                  <div className="relative aspect-video overflow-hidden border">
+                <div className="w-full">
+                  <div className="relative aspect-video overflow-hidden rounded-lg border shadow-md">
                     <Image
                       alt={isPot ? `Pot ${item._id}` : item.title || category}
                       className="object-cover"
                       fill
-                      sizes="(min-width: 1024px) 800px, 100vw"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
                       src={item.image}
                     />
                   </div>
@@ -110,14 +113,17 @@ const Showcase = async () => {
               );
 
               const textBlock = (
-                <div>
-                  <div className="mb-8 px-3 md:mb-0 md:px-14">
-                    <h2 className="mb-6 font-bold text-3xl tracking-tight sm:text-5xl">
+                <div className="w-full">
+                  <div className="mb-8 flex items-center justify-between px-3 md:mb-0 md:flex-col md:items-start md:px-14">
+                    <h2 className="font-bold text-2xl tracking-tight sm:mb-6 sm:text-3xl lg:text-4xl xl:text-5xl">
                       {category}
                     </h2>
-                    <div className="mb-8 space-y-4">
+                    <div className="sm:mb-8">
                       <Link
-                        className={buttonVariants({ variant: "default" })}
+                        className={buttonVariants({
+                          variant: "default",
+                          size: "lg",
+                        })}
                         href={`/artwork?category=${encodeURIComponent(category)}`}
                       >
                         View all {category}
@@ -129,20 +135,27 @@ const Showcase = async () => {
 
               return (
                 <section
-                  className="container mx-auto grid grid-cols-1 items-center gap-12 pt-16 pb-16 md:pt-24 md:pb-24 lg:grid-cols-2"
+                  className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-6 px-4 pt-8 pb-8 sm:gap-8 sm:pt-12 sm:pb-12 md:gap-12 md:pt-16 md:pb-16 lg:grid-cols-2 lg:pt-24 lg:pb-24"
                   key={category}
                 >
-                  {reversed ? (
-                    <>
-                      {imageContent}
-                      {textBlock}
-                    </>
-                  ) : (
-                    <>
-                      {textBlock}
-                      {imageContent}
-                    </>
-                  )}
+                  {/* On mobile, always show text first, then image. On lg+, alternate based on reversed */}
+                  <div className="lg:hidden">
+                    {textBlock}
+                    {imageContent}
+                  </div>
+                  <div className="hidden lg:contents">
+                    {reversed ? (
+                      <>
+                        {imageContent}
+                        {textBlock}
+                      </>
+                    ) : (
+                      <>
+                        {textBlock}
+                        {imageContent}
+                      </>
+                    )}
+                  </div>
                 </section>
               );
             })}
