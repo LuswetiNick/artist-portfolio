@@ -21,19 +21,20 @@ const TopMenu = [
 
 const Header = () => {
   return (
-    <header className="absolute top-0 left-0 z-10 flex w-full items-center justify-between px-6 py-4">
+    <header className="fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-xl">
       <div className="w-full px-4 py-2">
         <nav className="hidden justify-between md:flex">
-          <div className="relative">
+          <div className="relative flex items-center gap-3">
             <Image
               alt="Portrait of the artist"
-              height={96}
+              height={56}
               src="/images/logo.png"
-              width={96}
+              width={56}
             />
+            <span className="font-semibold text-lg">Afrika Mosaics</span>
           </div>
           <div className="flex items-center gap-6">
-            <ul className="flex items-center gap-4 text-white">
+            <ul className="flex items-center gap-4">
               {TopMenu.map((item) => (
                 <Link
                   className={cn(
@@ -52,12 +53,15 @@ const Header = () => {
         {/* mobile menu */}
         <div className="block md:hidden">
           <div className="flex items-center justify-between">
-            <Image
-              alt="Portrait of the artist"
-              height={96}
-              src="/images/logo.png"
-              width={96}
-            />
+            <div className="relative flex items-center gap-3">
+              <Image
+                alt="Portrait of the artist"
+                height={56}
+                src="/images/logo.png"
+                width={56}
+              />
+              <span className="font-semibold text-lg">Afrika Mosaics</span>
+            </div>
             <Sheet>
               <SheetTrigger asChild>
                 <Button size="icon" variant="outline">
@@ -67,12 +71,17 @@ const Header = () => {
               <SheetContent className="overflow-y-auto pt-0 pb-5" side="bottom">
                 <SheetHeader className="pb-0">
                   <SheetTitle>
-                    <Image
-                      alt="Portrait of the artist"
-                      height={96}
-                      src="/images/logo.png"
-                      width={96}
-                    />
+                    <div className="flex items-center gap-3">
+                      <Image
+                        alt="Portrait of the artist"
+                        height={56}
+                        src="/images/logo.png"
+                        width={56}
+                      />
+                      <span className="font-semibold text-lg">
+                        Afrika Mosaics
+                      </span>
+                    </div>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="mt-0 flex flex-col gap-0 px-4">

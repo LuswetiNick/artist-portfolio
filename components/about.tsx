@@ -40,8 +40,8 @@ const About = async () => {
       id="about"
     >
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-3 text-center font-bold font-ojuju text-2xl sm:text-3xl md:text-4xl">
-          The Artist
+        <h2 className="mb-3 text-center font-bold font-ojuju text-2xl uppercase sm:text-3xl md:text-4xl">
+          {about.fullname || "Keeper Of The Practice"}
         </h2>
         <div className="mx-auto mb-8 h-1 w-20 rounded-full bg-primary sm:mb-12 lg:mb-16" />
         <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 md:grid-cols-2 lg:gap-12">
@@ -57,12 +57,6 @@ const About = async () => {
             <div className="-left-4 -top-4 -z-10 sm:-left-6 sm:-top-6 absolute h-20 w-20 rounded-full bg-primary-200 sm:h-24 sm:w-24" />
           </div>
           <div className="mx-auto w-full max-w-4xl text-center md:text-left">
-            <h3 className="mb-3 font-semibold text-xl sm:mb-4 sm:text-2xl">
-              Hi, I'm{" "}
-              <span className="text-primary">
-                {about.fullname || "the artist"}
-              </span>
-            </h3>
             {/* Availability Badge */}
             {/* {about.availability && (
               <div className="mb-6">
