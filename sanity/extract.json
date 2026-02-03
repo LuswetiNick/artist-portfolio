@@ -1000,13 +1000,6 @@
         },
         "optional": true
       },
-      "year": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "number"
-        },
-        "optional": true
-      },
       "materials": {
         "type": "objectAttribute",
         "value": {

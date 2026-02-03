@@ -159,7 +159,6 @@ export type Artwork = {
   title?: string;
   slug?: Slug;
   description?: string;
-  year?: number;
   materials?: string;
   dimensions?: string;
   image?: {
@@ -310,7 +309,7 @@ export type ArtworksQueryResult = Array<{
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: number | null;
+  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {
@@ -337,7 +336,7 @@ export type FeaturedArtworksQueryResult = Array<{
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: number | null;
+  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {
@@ -366,7 +365,7 @@ export type ArtworkBySlugQueryResult = {
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: number | null;
+  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {
@@ -393,7 +392,7 @@ export type ArtworksByCategoryQueryResult = Array<{
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: number | null;
+  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {
@@ -420,7 +419,7 @@ export type RecentArtworksQueryResult = Array<{
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: number | null;
+  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {

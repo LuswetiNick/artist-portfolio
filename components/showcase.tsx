@@ -64,18 +64,23 @@ const Showcase = async () => {
         <div className="mx-auto mb-8 h-1 w-20 rounded-full bg-primary sm:mb-12 md:mb-16" />
         <div className="mb-8 space-y-4 text-center text-sm sm:text-base">
           <p>
-            Mosaic making is what gets my creative juices really flowing. The
-            mosaics are created on all manner of suitable surfaces and in
-            different scales and sizes. They include wall murals for exteriors
-            and interiors, wall panels for hanging, floors, swimming pools,
-            furniture, sculptures and flower pots.
+            Mosaic making is the wellspring of Githaka Karuri’s creative
+            expression. His work moves fluidly across scale and surface, taking
+            form as interior and exterior wall murals, hanging panels, floors,
+            swimming pools, furniture, sculptures, vessels, and mosaics woven
+            into natural building designs.
           </p>
           <p>
-            They are mostly made of recycled materials such as granite, marble,
-            ceramic tiles, glass, stone and any other suitable media. My art is
-            inspired by my interconnectedness with nature as well as culture.
-            Each piece is a storytelling in terms of subject matter, symbolism,
-            line flows, color, mood and movement.
+            Working primarily with recycled and reclaimed materials—granite,
+            marble, ceramic tile, glass, stone, and other found media—each piece
+            is an act of renewal, giving continuity to matter and meaning.
+          </p>
+          <p>
+            His practice is rooted in the understanding that he is nature, and
+            that art is culture. Every mosaic becomes a story—spoken through
+            symbolism, flowing lines, colour, mood, and movement—carrying
+            memory, place, and intention. The pages that follow offer a
+            selection from this ongoing mosaic journey.
           </p>
         </div>
 

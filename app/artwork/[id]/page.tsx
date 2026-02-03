@@ -100,9 +100,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
                       <h1 className="text-balance font-bold font-ojuju text-2xl sm:text-3xl md:text-4xl">
                         {fullProduct.title}
                       </h1>
-                      <p className="mt-2 text-base text-muted-foreground sm:text-lg">
+                      {/* <p className="mt-2 text-base text-muted-foreground sm:text-lg">
                         {fullProduct.year}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
 
@@ -148,10 +148,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
                       <span className="text-muted-foreground">Dimensions:</span>
                       <p className="font-medium">{fullProduct.dimensions}</p>
                     </div>
-                    <div>
+                    {/* <div>
                       <span className="text-muted-foreground">Year:</span>
                       <p className="font-medium">{fullProduct.year}</p>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

@@ -27,11 +27,11 @@ export default defineType({
       type: "text",
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: "year",
-      title: "Year",
-      type: "number",
-    }),
+    // defineField({
+    //   name: "year",
+    //   title: "Year",
+    //   type: "number",
+    // }),
     defineField({
       name: "materials",
       title: "Materials",
