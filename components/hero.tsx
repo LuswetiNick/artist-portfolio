@@ -44,7 +44,7 @@ const Hero = () => {
                 })}
                 href="#showcase"
               >
-                Explore The Practice
+                Explore The Craft
                 <ArrowRight />
               </Link>
             </div>
@@ -63,16 +63,6 @@ const Hero = () => {
                 fill
                 src="/images/WhatsApp Image 2026-02-02 at 21.19.30.jpeg"
               />
-
-              <div className="absolute bottom-6 left-6 z-20 max-w-[240px] rounded-xl border border-white/10 bg-stone-900/40 px-4 py-3 backdrop-blur-md">
-                <div className="flex items-start gap-3">
-                  <div>
-                    <h3 className="font-medium text-sm text-white tracking-tight">
-                      Art weaving into nature.
-                    </h3>
-                  </div>
-                </div>
-              </div>
             </div>
 
             <div className="-inset-1 -z-10 absolute rounded-2xl bg-gradient-to-tr from-orange-500/20 to-green-500/20 opacity-50 blur-2xl transition-opacity duration-700 group-hover:opacity-75" />
