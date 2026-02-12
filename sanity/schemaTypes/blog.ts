@@ -65,6 +65,12 @@ export default defineType({
       type: "datetime",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "author",
+      title: "Author",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
   ],
   preview: {
     select: {

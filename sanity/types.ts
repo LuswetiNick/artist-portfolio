@@ -81,6 +81,7 @@ export type Blog = {
     _key: string;
   }>;
   publishedAt?: string;
+  author?: string;
 };
 
 export type Pots = {
