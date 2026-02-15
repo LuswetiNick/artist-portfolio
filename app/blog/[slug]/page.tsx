@@ -1,5 +1,5 @@
 import { PortableText } from "@portabletext/react";
-import { ArrowLeft, Calendar } from "lucide-react";
+import { ArrowLeft, Calendar, User } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -105,6 +105,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className="flex items-center gap-2">
                 <Calendar className="size-4" />
                 {formattedDate}
+              </div>
+              <div className="flex items-center gap-2">
+                <User className="size-4" />
+                Githaka Karuri
               </div>
             </div>
           </div>

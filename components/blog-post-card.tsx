@@ -66,12 +66,11 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
               <Calendar className="h-4 w-4" />
               {formattedDate}
             </div>
-            {post.author && (
-              <div className="flex items-center gap-1">
-                <User className="h-4 w-4" />
-                {post.author}
-              </div>
-            )}
+
+            <div className="flex items-center gap-1">
+              <User className="h-4 w-4" />
+              Githaka Karuri
+            </div>
           </div>
         </div>
       </Card>
