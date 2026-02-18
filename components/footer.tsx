@@ -4,7 +4,8 @@ const Footer = () => {
   return (
     <footer className="bg-muted">
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
+          
           <div className="relative">
             <Image
               alt="Portrait of the artist"
@@ -14,12 +15,26 @@ const Footer = () => {
             />
           </div>
 
-          <p className="mt-4 text-center text-gray-500 text-sm lg:mt-0 lg:text-right dark:text-gray-400">
-            Copyright &copy; {new Date().getFullYear()}. All rights reserved.
-          </p>
+          <div className="flex items-center gap-6">
+            <a
+              href="https://linktr.ee/kai.retusforests"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm tracking-wide text-gray-500 transition-all duration-300 hover:text-foreground dark:text-gray-400"
+            >
+              Elsewhere
+            </a>
+
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              © {new Date().getFullYear()}.
+            </p>
+          </div>
+
         </div>
       </div>
     </footer>
   );
 };
+
 export default Footer;
+
