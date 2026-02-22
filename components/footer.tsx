@@ -1,3 +1,4 @@
+import Link  from "next/link";
 import Image from "next/image";
 
 const Footer = () => {
@@ -16,14 +17,13 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <a
+            <Link
               href="https://linktr.ee/kai.retusforests"
-              target="_blank"
-              rel="noopener noreferrer"
+           
               className="text-sm tracking-wide text-gray-500 transition-all duration-300 hover:text-foreground dark:text-gray-400"
             >
-              Elsewhere
-            </a>
+              Kai.retu's Forests
+            </Link>
 
             <p className="text-sm text-gray-500 dark:text-gray-400">
               © {new Date().getFullYear()}.
