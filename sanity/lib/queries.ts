@@ -9,7 +9,6 @@ export const artworksQuery =
   title,
   slug,
   description,
-  year,
   materials,
   dimensions,
   image,
@@ -19,12 +18,11 @@ export const artworksQuery =
 }`);
 
 export const featuredArtworksQuery =
-  defineQuery(`*[_type == "artwork" && featured == true] | order(year desc) {
+  defineQuery(`*[_type == "artwork" && featured == true] | order(_createdAt desc) {
   _id,
   title,
   slug,
   description,
-  year,
   materials,
   dimensions,
   image,
@@ -41,7 +39,6 @@ export const artworkBySlugQuery =
   title,
   slug,
   description,
-  year,
   materials,
   dimensions,
   image,
@@ -51,12 +48,11 @@ export const artworkBySlugQuery =
 }`);
 
 export const artworksByCategoryQuery =
-  defineQuery(`*[_type == "artwork" && category == $category] | order(year desc) {
+  defineQuery(`*[_type == "artwork" && category == $category] | order(_createdAt desc) {
   _id,
   title,
   slug,
   description,
-  year,
   materials,
   dimensions,
   image,
@@ -66,12 +62,11 @@ export const artworksByCategoryQuery =
 }`);
 
 export const recentArtworksQuery =
-  defineQuery(`*[_type == "artwork" && title != null] | order(year desc) [0...$limit] {
+  defineQuery(`*[_type == "artwork" && title != null] | order(_createdAt desc) [0...$limit] {
   _id,
   title,
   slug,
   description,
-  year,
   materials,
   dimensions,
   image,

@@ -16,6 +16,7 @@ const TopMenu = [
   { name: "About", href: "#about" },
   { name: "Showcase", href: "#showcase" },
   { name: "Blog", href: "#blog" },
+  { name: "Courses", href: "/courses" },
   { name: "Contact", href: "#contact" },
 ];
 

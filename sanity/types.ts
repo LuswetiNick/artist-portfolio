@@ -13,6 +13,81 @@
  */
 
 // Source: schema.json
+export type Course = {
+  _id: string;
+  _type: "course";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  programType?: "youth-intensive" | "advanced-youth" | "apprenticeship" | "school-partnership" | "adult-workshop" | "adult-immersive";
+  targetAudience?: string;
+  ageRange?: {
+    min?: number;
+    max?: number;
+  };
+  duration?: string;
+  sessionLength?: string;
+  totalHours?: number;
+  cohortSize?: {
+    min?: number;
+    max?: number;
+  };
+  location?: string;
+  applicationBased?: boolean;
+  about?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+  learningOutcomes?: Array<string>;
+  curriculumStructure?: Array<{
+    label?: string;
+    theme?: string;
+    description?: string;
+    _type: "curriculumItem";
+    _key: string;
+  }>;
+  materialsProvided?: Array<string>;
+  deliverables?: Array<string>;
+  pricing?: Array<{
+    label?: string;
+    amount?: number;
+    currency?: "KES" | "USD";
+    note?: string;
+    _type: "pricingTier";
+    _key: string;
+  }>;
+  featured?: boolean;
+};
+
 export type BlockContent = Array<{
   children?: Array<{
     marks?: Array<string>;
@@ -298,11 +373,11 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = BlockContent | Blog | Pots | About | Artwork | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = Course | BlockContent | Blog | Pots | About | Artwork | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/queries.ts
 // Variable: artworksQuery
-// Query: *[_type == "artwork"] | order(_createdAt desc) {  _id,  _createdAt,  _updatedAt,  title,  slug,  description,  year,  materials,  dimensions,  image,  category,  available,  featured}
+// Query: *[_type == "artwork"] | order(_createdAt desc) {  _id,  _createdAt,  _updatedAt,  title,  slug,  description,  materials,  dimensions,  image,  category,  available,  featured}
 export type ArtworksQueryResult = Array<{
   _id: string;
   _createdAt: string;
@@ -310,7 +385,6 @@ export type ArtworksQueryResult = Array<{
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {
@@ -331,13 +405,12 @@ export type ArtworksQueryResult = Array<{
   featured: boolean | null;
 }>;
 // Variable: featuredArtworksQuery
-// Query: *[_type == "artwork" && featured == true] | order(year desc) {  _id,  title,  slug,  description,  year,  materials,  dimensions,  image,  category,  available,  featured}
+// Query: *[_type == "artwork" && featured == true] | order(_createdAt desc) {  _id,  title,  slug,  description,  materials,  dimensions,  image,  category,  available,  featured}
 export type FeaturedArtworksQueryResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {
@@ -358,7 +431,7 @@ export type FeaturedArtworksQueryResult = Array<{
   featured: boolean | null;
 }>;
 // Variable: artworkBySlugQuery
-// Query: *[_type == "artwork" && slug.current == $slug][0] {  _id,  _createdAt,  _updatedAt,  title,  slug,  description,  year,  materials,  dimensions,  image,  category,  available,  featured}
+// Query: *[_type == "artwork" && slug.current == $slug][0] {  _id,  _createdAt,  _updatedAt,  title,  slug,  description,  materials,  dimensions,  image,  category,  available,  featured}
 export type ArtworkBySlugQueryResult = {
   _id: string;
   _createdAt: string;
@@ -366,7 +439,6 @@ export type ArtworkBySlugQueryResult = {
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {
@@ -387,13 +459,12 @@ export type ArtworkBySlugQueryResult = {
   featured: boolean | null;
 } | null;
 // Variable: artworksByCategoryQuery
-// Query: *[_type == "artwork" && category == $category] | order(year desc) {  _id,  title,  slug,  description,  year,  materials,  dimensions,  image,  category,  available,  featured}
+// Query: *[_type == "artwork" && category == $category] | order(_createdAt desc) {  _id,  title,  slug,  description,  materials,  dimensions,  image,  category,  available,  featured}
 export type ArtworksByCategoryQueryResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {
@@ -414,13 +485,12 @@ export type ArtworksByCategoryQueryResult = Array<{
   featured: boolean | null;
 }>;
 // Variable: recentArtworksQuery
-// Query: *[_type == "artwork" && title != null] | order(year desc) [0...$limit] {  _id,  title,  slug,  description,  year,  materials,  dimensions,  image,  category,  available,  featured}
+// Query: *[_type == "artwork" && title != null] | order(_createdAt desc) [0...$limit] {  _id,  title,  slug,  description,  materials,  dimensions,  image,  category,  available,  featured}
 export type RecentArtworksQueryResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
   description: string | null;
-  year: null;
   materials: string | null;
   dimensions: string | null;
   image: {
@@ -606,11 +676,11 @@ export type PotSlugsQueryResult = Array<string>;
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"artwork\"] | order(_createdAt desc) {\n  _id,\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  description,\n  year,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": ArtworksQueryResult;
-    "*[_type == \"artwork\" && featured == true] | order(year desc) {\n  _id,\n  title,\n  slug,\n  description,\n  year,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": FeaturedArtworksQueryResult;
-    "*[_type == \"artwork\" && slug.current == $slug][0] {\n  _id,\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  description,\n  year,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": ArtworkBySlugQueryResult;
-    "*[_type == \"artwork\" && category == $category] | order(year desc) {\n  _id,\n  title,\n  slug,\n  description,\n  year,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": ArtworksByCategoryQueryResult;
-    "*[_type == \"artwork\" && title != null] | order(year desc) [0...$limit] {\n  _id,\n  title,\n  slug,\n  description,\n  year,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": RecentArtworksQueryResult;
+    "*[_type == \"artwork\"] | order(_createdAt desc) {\n  _id,\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  description,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": ArtworksQueryResult;
+    "*[_type == \"artwork\" && featured == true] | order(_createdAt desc) {\n  _id,\n  title,\n  slug,\n  description,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": FeaturedArtworksQueryResult;
+    "*[_type == \"artwork\" && slug.current == $slug][0] {\n  _id,\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  description,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": ArtworkBySlugQueryResult;
+    "*[_type == \"artwork\" && category == $category] | order(_createdAt desc) {\n  _id,\n  title,\n  slug,\n  description,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": ArtworksByCategoryQueryResult;
+    "*[_type == \"artwork\" && title != null] | order(_createdAt desc) [0...$limit] {\n  _id,\n  title,\n  slug,\n  description,\n  materials,\n  dimensions,\n  image,\n  category,\n  available,\n  featured\n}": RecentArtworksQueryResult;
     "*[_type == \"pots\"] | order(_createdAt desc) {\n  _id,\n  _createdAt,\n  _updatedAt,\n  image,\n  featured\n}": PotsQueryResult;
     "*[_type == \"pots\" && featured == true] | order(_createdAt desc) {\n  _id,\n  image,\n  featured\n}": FeaturedPotsQueryResult;
     "*[_type == \"blog\"] | order(publishedAt desc) {\n  _id,\n  _createdAt,\n  _updatedAt,\n  title,\n  slug,\n  excerpt,\n  body,\n  featuredImage,\n  publishedAt\n}": BlogPostsQueryResult;

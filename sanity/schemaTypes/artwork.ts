@@ -111,14 +111,9 @@ export default defineType({
       by: [{ field: "featured", direction: "desc" }],
     },
     {
-      title: "Year (Newest First)",
-      name: "yearDesc",
-      by: [{ field: "year", direction: "desc" }],
-    },
-    {
-      title: "Year (Oldest First)",
-      name: "yearAsc",
-      by: [{ field: "year", direction: "asc" }],
+      title: "Title A–Z",
+      name: "titleAsc",
+      by: [{ field: "title", direction: "asc" }],
     },
   ],
 });

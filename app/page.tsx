@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import About from "@/components/about";
 import Blogs from "@/components/blogs";
 import Contact from "@/components/contact";
+import CoursesCTA from "@/components/courses-cta";
 import Footer from "@/components/footer";
 import Hero from "@/components/hero";
 import Showcase from "@/components/showcase";
@@ -14,6 +15,7 @@ const Home = () => {
       <About />
       <Showcase />
       <Blogs />
+      <CoursesCTA />
       <Contact />
       <Footer />
     </main>

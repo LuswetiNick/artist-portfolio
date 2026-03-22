@@ -12,7 +12,11 @@ export const structure: StructureResolver = (S) =>
       S.listItem()
         .title("Artworks")
         .schemaType("artwork")
-        .child(S.documentTypeList("artwork").title("Artworks")),
+        .child(
+          S.documentTypeList("artwork")
+            .title("Artworks")
+            .defaultOrdering([{ field: "title", direction: "asc" }])
+        ),
       S.listItem()
         .title("Pots")
         .schemaType("pots")
@@ -21,4 +25,8 @@ export const structure: StructureResolver = (S) =>
         .title("Blog")
         .schemaType("blog")
         .child(S.documentTypeList("blog").title("Blog")),
+      S.listItem()
+        .title("Courses")
+        .schemaType("course")
+        .child(S.documentTypeList("course").title("Courses")),
     ]);
