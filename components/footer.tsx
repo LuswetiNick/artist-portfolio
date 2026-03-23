@@ -11,7 +11,7 @@ const Footer = () => {
             <Image
               alt="Portrait of the artist"
               height={96}
-              src="/images/logo.png"
+              src="/images/new-logo.jpeg"
               width={96}
             />
           </div>
@@ -20,7 +20,7 @@ const Footer = () => {
             <Link
               href="https://linktr.ee/kai.retusforests"
            
-              className="text-sm tracking-wide text-gray-500 transition-all duration-300 hover:text-foreground dark:text-gray-400"
+              className="underline text-sm tracking-wide text-gray-500 transition-all duration-300 hover:text-foreground dark:text-gray-400"
             >
               Kai.retu's Forests
             </Link>
