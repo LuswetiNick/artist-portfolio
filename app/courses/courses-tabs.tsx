@@ -37,14 +37,15 @@ const ecolodgeCurriculum = [
 
 export default function CoursesTabs() {
   return (
-    <Tabs className="mt-10" defaultValue="residency">
+    <Tabs className="mt-10" defaultValue="programmes">
       <TabsList className="w-full">
+         <TabsTrigger className="flex-1" value="programmes">
+          Educational Programmes
+        </TabsTrigger>
         <TabsTrigger className="flex-1" value="residency">
           Eco-Lodge Residency
         </TabsTrigger>
-        <TabsTrigger className="flex-1" value="programmes">
-          Educational Programmes
-        </TabsTrigger>
+       
       </TabsList>
       {/* ── Eco-Lodge Residency ── */}
       <TabsContent className="mt-8" value="residency">
@@ -256,6 +257,7 @@ export default function CoursesTabs() {
                   <Badge variant="secondary">Ages 12–17</Badge>
                   <Badge variant="outline">4 Saturdays · 16 hrs total</Badge>
                   <Badge variant="outline">13 students</Badge>
+                  <Badge variant="outline">Studio or Partner School</Badge>
                 </div>
               </div>
               <div className="text-right">
@@ -281,6 +283,7 @@ export default function CoursesTabs() {
                     "Complete a finished mosaic panel (A3–A2 size)",
                     "Material reclamation & ecological thinking",
                     "Patience, focus, and presentation skills",
+                    "Publicly present their completed work",
                   ].map((o) => (
                     <li
                       className="flex items-start gap-2 text-muted-foreground text-xs"
@@ -312,12 +315,47 @@ export default function CoursesTabs() {
                 </ul>
               </div>
             </div>
-            <p className="mt-4 text-muted-foreground text-xs">
-              Each student receives: completed mosaic artwork, certificate of
-              completion, professional photograph of their work, and written
-              mentor feedback. Sibling discount: 10%. 1–2 scholarship spaces
-              available.
-            </p>
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 border-t pt-4">
+              <div>
+                <p className="mb-2 font-semibold text-sm">Each student receives</p>
+                <ul className="space-y-1">
+                  {[
+                    "Completed mosaic artwork",
+                    "Certificate of Completion",
+                    "Professional photograph of their work",
+                    "Written mentor feedback",
+                  ].map((r) => (
+                    <li
+                      className="flex items-start gap-2 text-muted-foreground text-xs"
+                      key={r}
+                    >
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
+                      {r}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-2 text-muted-foreground text-xs">Sibling discount: 10%</p>
+              </div>
+              <div>
+                <p className="mb-2 font-semibold text-sm">Materials provided</p>
+                <ul className="space-y-1">
+                  {[
+                    "Mosaic boards",
+                    "Reclaimed ceramic, granite, marble, glass",
+                    "Adhesives & grout",
+                    "Tool use (under supervision)",
+                  ].map((m) => (
+                    <li
+                      className="flex items-start gap-2 text-muted-foreground text-xs"
+                      key={m}
+                    >
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
+                      {m}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
 
           {/* 2. Advanced Youth Studio */}
@@ -347,26 +385,46 @@ export default function CoursesTabs() {
               architectural practice — participants work toward a real
               installation project.
             </p>
-            <ul className="mt-4 grid grid-cols-1 gap-1 sm:grid-cols-2">
-              {[
-                "Advanced mosaic cutting techniques",
-                "Collaborative installation processes",
-                "Architectural integration of mosaic surfaces",
-                "Complex design development",
-                "Material selection and preparation",
-                "Outdoor mosaic durability considerations",
-                "Collaborative mural creation",
-                "Participation in a real installation project",
-              ].map((o) => (
-                <li
-                  className="flex items-start gap-2 text-muted-foreground text-xs"
-                  key={o}
-                >
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" />
-                  {o}
-                </li>
-              ))}
-            </ul>
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <p className="mb-2 font-semibold text-sm">Learning Outcomes</p>
+                <ul className="space-y-1">
+                  {[
+                    "Develop advanced mosaic cutting techniques",
+                    "Learn collaborative installation processes",
+                    "Understand architectural integration of mosaic surfaces",
+                    "Participate in a real mosaic installation project",
+                  ].map((o) => (
+                    <li
+                      className="flex items-start gap-2 text-muted-foreground text-xs"
+                      key={o}
+                    >
+                      <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" />
+                      {o}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="mb-2 font-semibold text-sm">Curriculum Focus</p>
+                <ul className="space-y-1">
+                  {[
+                    "Complex design development",
+                    "Material selection and preparation",
+                    "Outdoor mosaic durability considerations",
+                    "Collaborative mural creation",
+                  ].map((o) => (
+                    <li
+                      className="flex items-start gap-2 text-muted-foreground text-xs"
+                      key={o}
+                    >
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
+                      {o}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
 
           {/* 3. Junior Apprenticeship */}
@@ -410,42 +468,65 @@ export default function CoursesTabs() {
 
           {/* 4. School Partnership */}
           <div className="rounded-xl border bg-card p-6 shadow-sm">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <h3 className="font-bold font-ojuju text-xl">
-                  School Partnership Programmes
-                </h3>
-                <div className="mt-1 flex flex-wrap gap-2">
-                  <Badge variant="secondary">Ages 12–17</Badge>
-                  <Badge variant="outline">4 weeks or term-based</Badge>
-                  <Badge variant="outline">~15 students</Badge>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="font-bold font-ojuju text-lg">
-                  KES 300,000–360,000
-                </p>
-                <p className="text-muted-foreground text-xs">
-                  Materials included
-                </p>
+            <div className="mb-4">
+              <h3 className="font-bold font-ojuju text-xl">
+                School Partnership Programmes
+              </h3>
+              <div className="mt-1 flex flex-wrap gap-2">
+                <Badge variant="secondary">Ages 12–17</Badge>
+                <Badge variant="outline">In-school delivery</Badge>
               </div>
             </div>
-            <ul className="mt-4 space-y-1">
-              {[
-                "Students complete individual mosaic artworks",
-                "Optional collaborative mural for school campus",
-                "Creative skill development and cultural engagement",
-                "Opportunity for school exhibition or showcase",
-              ].map((o) => (
-                <li
-                  className="flex items-start gap-2 text-muted-foreground text-xs"
-                  key={o}
-                >
-                  <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" />
-                  {o}
-                </li>
-              ))}
-            </ul>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="rounded-lg border p-4">
+                <div className="flex items-start justify-between gap-2">
+                  <p className="font-semibold text-sm">Young Keepers Intensive</p>
+                  <Badge variant="outline">4 weeks or term</Badge>
+                </div>
+                <p className="mt-1 text-muted-foreground text-xs">13 students · Materials included</p>
+                <div className="mt-3 border-t pt-3">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-muted-foreground">Programme fee</span>
+                    <span className="font-bold font-ojuju">KES 290,000</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-lg border p-4">
+                <div className="flex items-start justify-between gap-2">
+                  <p className="font-semibold text-sm">Advanced Youth Studio</p>
+                  <Badge variant="outline">8–12 weeks</Badge>
+                </div>
+                <p className="mt-1 text-muted-foreground text-xs">8 students · 3–4 hrs/week</p>
+                <div className="mt-3 border-t pt-3">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-muted-foreground">Programme fee</span>
+                    <span className="font-bold font-ojuju">KES 40,000–55,000</span>
+                  </div>
+                  <p className="mt-1 text-muted-foreground text-xs">Depending on materials & scale</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <p className="mb-2 font-semibold text-sm">Institutional Outcomes</p>
+              <ul className="space-y-1">
+                {[
+                  "Students complete individual mosaic artworks or a collaborative mural for the school campus",
+                  "Creative skill development and cultural engagement",
+                  "Opportunity for school exhibition or showcase",
+                ].map((o) => (
+                  <li
+                    className="flex items-start gap-2 text-muted-foreground text-xs"
+                    key={o}
+                  >
+                    <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-primary" />
+                    {o}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* 5. Adult & Professional */}
@@ -544,7 +625,33 @@ export default function CoursesTabs() {
           </div>
         </div>
 
-        <div className="mt-10 rounded-2xl border bg-card px-6 py-10 text-center shadow-sm">
+        {/* Programme Impact */}
+        <div className="mt-6 rounded-xl border bg-card p-6 shadow-sm">
+          <h3 className="mb-3 font-bold font-ojuju text-xl">Programme Impact</h3>
+          <div className="mb-4 h-0.5 w-10 rounded-full bg-primary/40" />
+          <p className="mb-3 text-muted-foreground text-sm">
+            The educational programmes under Afrika Mosaics and Kai.retu&apos;s
+            Forests aim to:
+          </p>
+          <ul className="space-y-1">
+            {[
+              "Preserve and transmit mosaic craft knowledge",
+              "Encourage regenerative use of reclaimed materials",
+              "Provide meaningful creative mentorship for youth",
+              "Integrate art into architectural and ecological thinking",
+            ].map((item) => (
+              <li
+                className="flex items-start gap-2 text-muted-foreground text-sm"
+                key={item}
+              >
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-6 rounded-2xl border bg-card px-6 py-10 text-center shadow-sm">
           <h2 className="mb-2 font-ojuju font-semibold text-2xl">
             Ready to enrol?
           </h2>

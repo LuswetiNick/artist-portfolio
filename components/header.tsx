@@ -29,7 +29,7 @@ const Header = () => {
             <Image
               alt="Portrait of the artist"
               height={56}
-              src="/images/new-logo.jpeg"
+              src="/images/logo.png"
               width={56}
             />
             <span className="font-semibold text-lg">Afrika Mosaics</span>
@@ -58,7 +58,7 @@ const Header = () => {
               <Image
                 alt="Portrait of the artist"
                 height={56}
-                src="/images/new-logo.jpeg"
+                src="/images/logo.png"
                 width={56}
               />
               <span className="font-semibold text-lg">Afrika Mosaics</span>
