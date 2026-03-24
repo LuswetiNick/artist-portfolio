@@ -255,7 +255,7 @@ export default function CoursesTabs() {
                 <div className="mt-1 flex flex-wrap gap-2">
                   <Badge variant="secondary">Ages 12–17</Badge>
                   <Badge variant="outline">4 Saturdays · 16 hrs total</Badge>
-                  <Badge variant="outline">10–12 students</Badge>
+                  <Badge variant="outline">13 students</Badge>
                 </div>
               </div>
               <div className="text-right">
@@ -330,12 +330,12 @@ export default function CoursesTabs() {
                 <div className="mt-1 flex flex-wrap gap-2">
                   <Badge variant="secondary">Ages 14–18</Badge>
                   <Badge variant="outline">8–12 weeks</Badge>
-                  <Badge variant="outline">6–8 students</Badge>
+                  <Badge variant="outline">8 students</Badge>
                 </div>
               </div>
               <div className="text-right">
                 <p className="font-bold font-ojuju text-lg">
-                  KES 35,000–55,000
+                  KES 40,000–55,000
                 </p>
                 <p className="text-muted-foreground text-xs">
                   Depending on materials & scale
