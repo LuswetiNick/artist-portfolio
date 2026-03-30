@@ -16,7 +16,7 @@ const objectives = [
 
 const lodgeContributions = [
   "Promotion of the programme",
-  "Accommodation and breakfast for the artist",
+  "Accommodation and meals for the artist",
   "Workspace area",
 ];
 
